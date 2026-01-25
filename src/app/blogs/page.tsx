@@ -15,25 +15,28 @@ export const metadata: Metadata = {
 
 const blogs = [
     {
+        title: "How can GenAI improve and reform the education sector (instead of ruining it)",
+        date: "Medium Article",
+        readTime: "5 min read",
+        excerpt: "Exploring the transformative potential of Generative AI in education—shifting from fear of cheating to personalized learning, operational efficiency, and creative empowerment.",
+        slug: "https://medium.com/@ahmedraza1ansari/how-can-genai-improve-and-reform-the-education-sector-instead-of-ruining-it-763cdadb5c20",
+        external: true
+    },
+    {
         title: "Understanding LLM Quantization: GGUF & The Future of Local Inference",
-        date: "October 15, 2025",
-        readTime: "8 min read",
+        date: "Coming Soon",
+        readTime: "TBD",
         excerpt: "Exploring how quantization techniques like GGUF recallibrate weights to run massive models on consumer hardware without significant accuracy loss.",
-        slug: "llm-quantization-gguf"
+        slug: "#",
+        external: false
     },
     {
         title: "Building Agentic Workflows with LangChain",
-        date: "September 2, 2025",
-        readTime: "12 min read",
+        date: "Coming Soon",
+        readTime: "TBD",
         excerpt: "A deep dive into constructing autonomous agents that can reason, plan, and execute multi-step tasks using Chain-of-Thought prompting.",
-        slug: "building-agentic-workflows"
-    },
-    {
-        title: "RAG vs. Fine-Tuning: Making the Right Choice",
-        date: "August 10, 2025",
-        readTime: "6 min read",
-        excerpt: "When should you inject context via RAG and when does it make sense to burn knowledge into weights? A practical guide for engineers.",
-        slug: "rag-vs-finetuning"
+        slug: "#",
+        external: false
     }
 ];
 
@@ -51,19 +54,39 @@ export default function Blogs() {
 
             <div style={{ display: "grid", gap: "2rem" }}>
                 {blogs.map((blog, index) => (
-                    <div key={index} className="glass-card animate-fade-in" style={{ padding: "2rem", cursor: "pointer", animationDelay: `${index * 0.1}s` }}>
+                    <a
+                        key={index}
+                        href={blog.slug}
+                        target={blog.external ? "_blank" : undefined}
+                        rel={blog.external ? "noopener noreferrer" : undefined}
+                        className="glass-card animate-fade-in"
+                        style={{
+                            padding: "2rem",
+                            cursor: blog.external ? "pointer" : "default",
+                            display: "block",
+                            textDecoration: "none",
+                            animationDelay: `${index * 0.1}s`,
+                            opacity: blog.slug === "#" ? 0.7 : 1
+                        }}
+                    >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
                             <span style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>{blog.date}</span>
                             <span style={{ fontSize: "0.8rem", padding: "0.25rem 0.75rem", borderRadius: "99px", background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}>{blog.readTime}</span>
                         </div>
-                        <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem" }}>{blog.title}</h2>
+                        <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem", color: "var(--foreground)" }}>{blog.title}</h2>
                         <p style={{ color: "var(--text-secondary)", lineHeight: "1.6", marginBottom: "1.5rem" }}>
                             {blog.excerpt}
                         </p>
-                        <span style={{ color: "var(--foreground)", fontWeight: 500, fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                            Read Article <span>→</span>
-                        </span>
-                    </div>
+                        {blog.external ? (
+                            <span style={{ color: "var(--primary)", fontWeight: 500, fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                Read on Medium <span>→</span>
+                            </span>
+                        ) : (
+                            <span style={{ color: "var(--text-muted)", fontWeight: 500, fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                                Coming Soon
+                            </span>
+                        )}
+                    </a>
                 ))}
             </div>
         </div>

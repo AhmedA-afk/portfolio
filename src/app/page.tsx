@@ -1,6 +1,13 @@
+"use client";
+
 import styles from "./page.module.css";
 import Link from "next/link";
-import { HeroOrb } from "@/components/hero-orb";
+import dynamic from "next/dynamic";
+
+const HeroOrb = dynamic(() => import("@/components/hero-orb").then((mod) => mod.HeroOrb), {
+  ssr: false,
+  loading: () => <div style={{ height: "400px", width: "400px" }} />, // Placeholder to avoid layout shift
+});
 
 export default function Home() {
   return (

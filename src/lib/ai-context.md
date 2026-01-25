@@ -146,6 +146,13 @@ Ahmed has 1.5+ years of experience building LLM-powered systems, automation plat
 
 ---
 
+## Publications
+- **"How can GenAI improve and reform the education sector (instead of ruining it)"** (Medium)
+  - URL: https://medium.com/@ahmedraza1ansari/how-can-genai-improve-and-reform-the-education-sector-instead-of-ruining-it-763cdadb5c20
+  - Topics: Personalized learning, operational efficiency, shifting from fear of cheating to empowerment.
+
+---
+
 ## Personal Interests
 - Reading Classics/Novels
 - Sketching

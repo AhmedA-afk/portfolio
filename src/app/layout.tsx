@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ahmed Ansari | AI/ML Engineer",
     description: "Building autonomous AI agents and production-ready LLM systems.",
-    creator: "@zenith", // Update if you have a specific handle
+    creator: "@AhmedA-afk",
   },
   alternates: {
     canonical: "https://ahmedansari.me",
@@ -70,7 +70,8 @@ const jsonLd = {
   "url": "https://ahmedansari.me",
   "sameAs": [
     "https://linkedin.com/in/ahmed-1-ansari",
-    "https://github.com/AhmedA-afk"
+    "https://github.com/AhmedA-afk",
+    "https://linktr.ee/ahmed1ansari"
   ],
   "worksFor": {
     "@type": "Organization",
