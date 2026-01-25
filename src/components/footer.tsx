@@ -8,7 +8,7 @@ export function Footer() {
             borderTop: "1px solid var(--glass-border)",
             marginTop: "auto"
         }}>
-            <p>© 2026 Ahmed Ansari. Designed with Next.js & Liquid Glass.</p>
+            <p>© 2026 Ahmed Ansari. All rights reserved.</p>
         </footer>
     );
 }

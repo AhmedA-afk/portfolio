@@ -229,3 +229,182 @@ a:hover {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Mobile Optimizations */
+
+/* Defaults (Desktop) */
+.nav-hamburger-btn {
+  display: none;
+}
+
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background: var(--background);
+  padding: 80px 20px 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Open State for Overlay */
+.mobile-menu-overlay.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Glass effect for overlay (optional, can be removed if plain background preferred) */
+.mobile-menu-overlay {
+  background: rgba(255, 255, 255, 0.98);
+  /* Fallback light */
+  backdrop-filter: blur(10px);
+}
+
+[data-theme='dark'] .mobile-menu-overlay {
+  background: rgba(2, 6, 23, 0.98);
+  /* Fallback dark */
+}
+
+
+@media (max-width: 768px) {
+
+  /* Visibility Toggles */
+  .desktop-only,
+  .desktop-divider {
+    display: none !important;
+  }
+
+  .nav-hamburger-btn {
+    display: block !important;
+  }
+
+  /* Navbar Layout */
+  .navbar-fixed {
+    width: 90vw !important;
+    max-width: 90vw !important;
+    min-width: 90vw !important;
+    justify-content: space-between !important;
+    padding: 12px 20px !important;
+    top: 1rem !important;
+    flex-wrap: nowrap !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Enable Overlay on Mobile */
+  .mobile-menu-overlay {
+    display: flex;
+  }
+
+  /* General Mobile Styles */
+  .glass-panel {
+    padding: 1.5rem !important;
+    border-radius: 16px !important;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  p,
+  li {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .glass-card {
+    padding: 1.25rem !important;
+  }
+
+  section {
+    margin-bottom: 3rem !important;
+  }
+
+  .stats-container {
+    gap: 1.5rem !important;
+    flex-direction: column !important;
+  }
+}
+
+/* Docs Page Styles */
+.docs-container {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.docs-sidebar {
+  width: 260px;
+  border-right: 1px solid var(--glass-border);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: fixed;
+  height: calc(100vh - 100px);
+  top: 100px;
+  /* Adjust for floating navbar */
+  background: var(--glass-bg);
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.docs-content {
+  margin-left: 260px;
+  padding: 3rem;
+  width: 100%;
+  max-width: 900px;
+}
+
+.docs-mobile-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  /* Docs Mobile Overrides */
+  .docs-sidebar {
+    display: none !important;
+  }
+
+  .docs-content {
+    margin-left: 0 !important;
+    padding: 2rem 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .docs-mobile-nav {
+    display: flex !important;
+    position: sticky;
+    top: 80px;
+    z-index: 90;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 0.75rem;
+    scrollbar-width: none;
+  }
+
+  .docs-mobile-nav::-webkit-scrollbar {
+    display: none;
+  }
+}

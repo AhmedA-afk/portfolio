@@ -42,12 +42,13 @@ export default function Home() {
         </div>
 
         {/* Quick stats */}
-        <div style={{
+        <div className="stats-container" style={{
           display: 'flex',
           gap: '2rem',
           marginTop: '3rem',
           flexWrap: 'wrap',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          flexDirection: 'row'
         }}>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary)' }}>1.5+</div>

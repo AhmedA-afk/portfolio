@@ -1,3 +1,18 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Blogs & Insights | Ahmed Ansari",
+    description: "Read thoughts on AI, LLM quantization (GGUF), Agentic workflows, and the future of software engineering.",
+    openGraph: {
+        title: "Blogs & Insights | Ahmed Ansari",
+        description: "Deep dives into AI/ML engineering, from local inference to production-grade agent systems.",
+        url: "https://ahmedansari.me/blogs",
+    },
+    alternates: {
+        canonical: "https://ahmedansari.me/blogs",
+    },
+};
+
 const blogs = [
     {
         title: "Understanding LLM Quantization: GGUF & The Future of Local Inference",

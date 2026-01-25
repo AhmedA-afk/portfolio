@@ -6,109 +6,76 @@ type DocSection = "introduction" | "cli" | "llms" | "apis";
 
 export default function DocsClient() {
     const [activeSection, setActiveSection] = useState<DocSection>("introduction");
+    // No longer need separate mobile menu state, using tabs
+
+    const sections: { id: DocSection; label: string }[] = [
+        { id: "introduction", label: "Introduction" },
+        { id: "cli", label: "CLI Terminal" },
+        { id: "llms", label: "LLM Tools" },
+        { id: "apis", label: "API Reference" },
+    ];
 
     return (
-        <div style={{ display: "flex", minHeight: "80vh" }}>
-            {/* Sidebar */}
-            <aside className="glass-panel" style={{
-                width: "260px",
-                borderRight: "1px solid var(--glass-border)",
-                padding: "2rem 1.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.5rem",
-                position: "fixed",
-                height: "calc(100vh - 80px)",
-                borderRadius: 0,
-                borderTop: 0,
-                borderBottom: 0,
-                borderLeft: 0,
-                background: "var(--glass-bg)",
-                overflowY: "auto"
-            }}>
-                <div>
-                    <h3 style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Getting Started</h3>
-                    <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem", color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-                        <li
-                            onClick={() => setActiveSection("introduction")}
-                            style={{
-                                color: activeSection === "introduction" ? "var(--foreground)" : "inherit",
-                                fontWeight: activeSection === "introduction" ? 500 : 400,
-                                cursor: "pointer",
-                                padding: "0.5rem 0.75rem",
-                                borderRadius: "8px",
-                                background: activeSection === "introduction" ? "rgba(255,255,255,0.1)" : "transparent",
-                                transition: "all 0.2s"
-                            }}
-                        >
-                            Introduction
-                        </li>
-                    </ul>
-                </div>
+        <div style={{ display: "flex", flexDirection: "column", minHeight: "80vh", position: "relative" }}>
 
-                <div>
-                    <h3 style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Portfolio Features</h3>
-                    <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem", color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-                        <li
-                            onClick={() => setActiveSection("cli")}
-                            style={{
-                                color: activeSection === "cli" ? "var(--foreground)" : "inherit",
-                                fontWeight: activeSection === "cli" ? 500 : 400,
-                                cursor: "pointer",
-                                padding: "0.5rem 0.75rem",
-                                borderRadius: "8px",
-                                background: activeSection === "cli" ? "rgba(255,255,255,0.1)" : "transparent",
-                                transition: "all 0.2s"
-                            }}
-                        >
-                            CLI Terminal
-                        </li>
-                    </ul>
-                </div>
+            {/* Mobile Top Tabs Navigation */}
+            <nav className="docs-mobile-nav">
+                {sections.map(section => (
+                    <button
+                        key={section.id}
+                        onClick={() => setActiveSection(section.id)}
+                        style={{
+                            padding: "0.5rem 1rem",
+                            borderRadius: "999px",
+                            border: "none",
+                            background: activeSection === section.id ? "var(--foreground)" : "rgba(255,255,255,0.05)",
+                            color: activeSection === section.id ? "var(--background)" : "var(--text-secondary)",
+                            fontSize: "0.9rem",
+                            fontWeight: 500,
+                            cursor: "pointer",
+                            transition: "all 0.2s",
+                            flexShrink: 0
+                        }}
+                    >
+                        {section.label}
+                    </button>
+                ))}
+            </nav>
 
-                <div>
-                    <h3 style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Coming Soon</h3>
-                    <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem", color: "var(--text-muted)", fontSize: "0.95rem" }}>
-                        <li
-                            onClick={() => setActiveSection("llms")}
-                            style={{
-                                color: activeSection === "llms" ? "var(--foreground)" : "inherit",
-                                fontWeight: activeSection === "llms" ? 500 : 400,
-                                cursor: "pointer",
-                                padding: "0.5rem 0.75rem",
-                                borderRadius: "8px",
-                                background: activeSection === "llms" ? "rgba(255,255,255,0.1)" : "transparent",
-                                transition: "all 0.2s",
-                                opacity: 0.6
-                            }}
-                        >
-                            LLM Tools
-                        </li>
-                        <li
-                            onClick={() => setActiveSection("apis")}
-                            style={{
-                                color: activeSection === "apis" ? "var(--foreground)" : "inherit",
-                                fontWeight: activeSection === "apis" ? 500 : 400,
-                                cursor: "pointer",
-                                padding: "0.5rem 0.75rem",
-                                borderRadius: "8px",
-                                background: activeSection === "apis" ? "rgba(255,255,255,0.1)" : "transparent",
-                                transition: "all 0.2s",
-                                opacity: 0.6
-                            }}
-                        >
-                            API Reference
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            <div className="docs-container">
+                {/* Desktop Sidebar */}
+                <aside className="docs-sidebar glass-panel" style={{ borderRadius: 0, borderTop: 0, borderBottom: 0, borderLeft: 0 }}>
+                    <div>
+                        <h3 style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: "1rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>Navigation</h3>
+                        <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem", color: "var(--text-secondary)", fontSize: "0.95rem" }}>
+                            {sections.map(section => (
+                                <li
+                                    key={section.id}
+                                    onClick={() => setActiveSection(section.id)}
+                                    style={{
+                                        color: activeSection === section.id ? "var(--foreground)" : "inherit",
+                                        fontWeight: activeSection === section.id ? 500 : 400,
+                                        cursor: "pointer",
+                                        padding: "0.5rem 0.75rem",
+                                        borderRadius: "8px",
+                                        background: activeSection === section.id ? "rgba(255,255,255,0.1)" : "transparent",
+                                        transition: "all 0.2s"
+                                    }}
+                                >
+                                    {section.label}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </aside>
 
-            {/* Main Content */}
-            <div style={{ marginLeft: "260px", padding: "3rem", width: "100%", maxWidth: "900px" }}>
-                {activeSection === "introduction" && <IntroductionSection />}
-                {activeSection === "cli" && <CLISection />}
-                {activeSection === "llms" && <ComingSoonSection title="LLM Tools Documentation" />}
-                {activeSection === "apis" && <ComingSoonSection title="API Reference" />}
+                {/* Main Content */}
+                <div className="docs-content">
+                    {activeSection === "introduction" && <IntroductionSection />}
+                    {activeSection === "cli" && <CLISection />}
+                    {activeSection === "llms" && <ComingSoonSection title="LLM Tools Documentation" />}
+                    {activeSection === "apis" && <ComingSoonSection title="API Reference" />}
+                </div>
             </div>
         </div>
     );
