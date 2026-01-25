@@ -253,14 +253,41 @@ function CLISection() {
                 />
             </div>
 
+            <h2 style={{ fontSize: "1.75rem", fontWeight: 600, marginTop: "3rem", marginBottom: "1.5rem" }}>AI Assistant</h2>
+            <div className="glass-card" style={{ padding: "2rem", marginBottom: "2rem", borderLeft: "4px solid #f0b429" }}>
+                <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "1rem" }}>
+                    The terminal is powered by <strong>Google Gemini AI</strong>. Just type naturally to ask anything about Ahmed&apos;s work, experience, or projects!
+                </p>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>
+                    The AI has full context about Ahmed&apos;s skills, experience at Motadata, projects, and technical expertise.
+                </p>
+            </div>
+
+            <h3 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "1rem" }}>AI Examples</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "2rem" }}>
+                <AIExampleCard query="What is your experience with LLMs?" />
+                <AIExampleCard query="Tell me about your work at Motadata" />
+                <AIExampleCard query="What projects have you built?" />
+                <AIExampleCard query="What is RAG and have you used it?" />
+            </div>
+
+            <h3 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "1rem" }}>Explicit AI Command</h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <CommandCard
+                    command="/ai [message]"
+                    description="Explicitly send a message to the AI assistant"
+                />
+            </div>
+
             <h2 style={{ fontSize: "1.75rem", fontWeight: 600, marginTop: "3rem", marginBottom: "1.5rem" }}>Terminal Features</h2>
             <div className="glass-card" style={{ padding: "2rem" }}>
                 <ul style={{ color: "var(--text-secondary)", lineHeight: 2, paddingLeft: "1.5rem" }}>
+                    <li><strong>AI-Powered</strong> — Natural language queries answered by Gemini AI</li>
                     <li><strong>Draggable Window</strong> — Click and drag the title bar to move the terminal</li>
                     <li><strong>Zorin OS Theme</strong> — Purple-tinted design inspired by Zorin OS</li>
                     <li><strong>macOS-style Controls</strong> — Red/yellow/green window buttons</li>
-                    <li><strong>Command History</strong> — All commands are preserved in the session</li>
-                    <li><strong>Auto-focus</strong> — Terminal input automatically focuses when opened</li>
+                    <li><strong>Conversation Memory</strong> — AI remembers context within the session</li>
+                    <li><strong>Loading States</strong> — Visual feedback while AI is thinking</li>
                     <li><strong>Smooth Animations</strong> — Powered by Framer Motion</li>
                 </ul>
             </div>
@@ -285,20 +312,25 @@ function CLISection() {
                     /theme &nbsp;&nbsp;&nbsp;&nbsp;- Toggle light/dark mode<br />
                     /clear &nbsp;&nbsp;&nbsp;&nbsp;- Clear terminal
                 </div>
-                <div style={{ color: "#00d4aa", marginTop: "0.5rem" }}>Navigation:</div>
+                <div style={{ color: "#f0b429", marginTop: "0.5rem" }}>AI Assistant:</div>
                 <div style={{ color: "#a89bb0", paddingLeft: "1rem" }}>
-                    cd [page] &nbsp;- Navigate to page (home, about, projects, blogs, docs, resume)
+                    Just type naturally to ask me anything!
                 </div>
                 <div style={{ color: "#a89bb0", marginTop: "1rem" }}>
-                    <span style={{ color: "#15c860", fontWeight: 700 }}>zenith</span>
+                    <span style={{ color: "#15c860", fontWeight: 700 }}>ahmed</span>
                     <span style={{ color: "#a89bb0" }}>@</span>
                     <span style={{ color: "#9b59b6", fontWeight: 600 }}>portfolio</span>
                     <span style={{ color: "#a89bb0" }}>:</span>
                     <span style={{ color: "#00d4aa" }}>~</span>
                     <span style={{ color: "#a89bb0" }}>$ </span>
-                    <span style={{ color: "#e8e8e8" }}>cd projects</span>
+                    <span style={{ color: "#e8e8e8" }}>What is your experience with RAG?</span>
                 </div>
-                <div style={{ color: "#15c860", marginTop: "0.25rem" }}>→ Navigating to /projects...</div>
+                <div style={{ marginTop: "0.5rem", paddingLeft: "0.5rem" }}>
+                    <span style={{ color: "#f0b429", fontWeight: 600, fontSize: "0.85rem" }}>AI</span>
+                </div>
+                <div style={{ color: "#e8e8e8", paddingLeft: "0.5rem", marginTop: "0.25rem" }}>
+                    I&apos;ve worked extensively with RAG systems at Motadata. I built an internal MCP/Agno platform that uses RAG with Weaviate and PGVector to enable contextual querying across documentation, tickets, and databases...
+                </div>
             </div>
         </>
     );
@@ -369,3 +401,21 @@ function CommandCard({ command, description, aliases }: { command: string; descr
         </div>
     );
 }
+
+function AIExampleCard({ query }: { query: string }) {
+    return (
+        <div className="glass-card" style={{ padding: "0.75rem 1.25rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+            <code style={{
+                background: "rgba(240, 180, 41, 0.15)",
+                color: "#f0b429",
+                padding: "4px 10px",
+                borderRadius: "6px",
+                fontFamily: "monospace",
+                fontSize: "0.85rem"
+            }}>
+                {query}
+            </code>
+        </div>
+    );
+}
+

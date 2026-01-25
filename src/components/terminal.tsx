@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Minus, Square, X } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
@@ -10,6 +10,12 @@ import { motion, AnimatePresence } from "framer-motion";
 interface CommandHistory {
     command: string;
     output: React.ReactNode;
+    isAI?: boolean;
+}
+
+interface ConversationMessage {
+    role: "user" | "assistant";
+    content: string;
 }
 
 // Zorin OS color palette
@@ -24,13 +30,42 @@ const ZORIN = {
     textMuted: "#a89bb0",     // Muted purple-tinted text
     error: "#ff6b6b",         // Error red
     border: "rgba(155, 89, 182, 0.3)", // Purple border
+    ai: "#f0b429",            // Golden yellow for AI responses
 };
+
+// Known commands that should NOT go to AI
+const KNOWN_COMMANDS = [
+    "help", "/help",
+    "about", "/about",
+    "projects", "/projects",
+    "socials", "/socials",
+    "theme", "/theme",
+    "clear", "/clear",
+    ""
+];
+
+// Simple markdown parser for AI responses
+function parseMarkdown(text: string): React.ReactNode {
+    // Split by bold markers (**text**)
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+
+    return parts.map((part, index) => {
+        // Check if this part is bold (surrounded by **)
+        if (part.startsWith("**") && part.endsWith("**")) {
+            const boldText = part.slice(2, -2);
+            return <strong key={index} style={{ color: "#fff", fontWeight: 600 }}>{boldText}</strong>;
+        }
+        return <span key={index}>{part}</span>;
+    });
+}
 
 export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
     const [input, setInput] = useState("");
     const [history, setHistory] = useState<CommandHistory[]>([
-        { command: "init", output: "Welcome to Portfolio CLI v1.0.0. Type '/help' for commands." },
+        { command: "init", output: "Welcome to Portfolio CLI v2.0 with AI. Type '/help' for commands or ask me anything!" },
     ]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [conversation, setConversation] = useState<ConversationMessage[]>([]);
     const bottomRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const { theme, setTheme } = useTheme();
@@ -56,7 +91,83 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         }
     }, [history, isOpen]);
 
-    const handleCommand = (cmd: string) => {
+    // Check if input is a known command or navigation
+    const isKnownCommand = useCallback((cmd: string): boolean => {
+        const trimmed = cmd.trim().toLowerCase();
+        if (trimmed.startsWith("cd ")) return true;
+        if (KNOWN_COMMANDS.includes(trimmed)) return true;
+        return false;
+    }, []);
+
+    // Handle AI query
+    const handleAIQuery = useCallback(async (query: string) => {
+        setIsLoading(true);
+
+        // Add user message to history immediately
+        setHistory((prev) => [...prev, {
+            command: query,
+            output: <span style={{ color: ZORIN.textMuted, fontStyle: "italic" }}>Thinking...</span>,
+            isAI: true
+        }]);
+
+        try {
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    message: query,
+                    history: conversation
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Failed to get response");
+            }
+
+            // Update conversation context
+            setConversation((prev) => [
+                ...prev,
+                { role: "user", content: query },
+                { role: "assistant", content: data.response }
+            ]);
+
+            // Update the last history entry with the AI response
+            setHistory((prev) => {
+                const newHistory = [...prev];
+                newHistory[newHistory.length - 1] = {
+                    command: query,
+                    output: (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                            <span style={{ color: ZORIN.ai, fontWeight: 600, fontSize: "0.85rem" }}>AI</span>
+                            <span style={{ color: ZORIN.text, whiteSpace: "pre-wrap", lineHeight: 1.6 }}>
+                                {parseMarkdown(data.response)}
+                            </span>
+                        </div>
+                    ),
+                    isAI: true
+                };
+                return newHistory;
+            });
+
+        } catch (error) {
+            console.error("AI query error:", error);
+            setHistory((prev) => {
+                const newHistory = [...prev];
+                newHistory[newHistory.length - 1] = {
+                    command: query,
+                    output: <span style={{ color: ZORIN.error }}>Failed to get AI response. Please try again.</span>,
+                    isAI: true
+                };
+                return newHistory;
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    }, [conversation]);
+
+    const handleCommand = useCallback((cmd: string) => {
         const trimmedCmd = cmd.trim().toLowerCase();
         let output: React.ReactNode = "";
 
@@ -80,6 +191,13 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             }
         }
 
+        // Check for explicit AI command
+        if (trimmedCmd.startsWith("/ai ") || trimmedCmd.startsWith("ai ")) {
+            const query = cmd.trim().slice(trimmedCmd.startsWith("/ai ") ? 4 : 3);
+            handleAIQuery(query);
+            return;
+        }
+
         switch (trimmedCmd) {
             case "help":
             case "/help":
@@ -94,6 +212,9 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                         <span style={{ color: ZORIN.textMuted }}>  /clear     - Clear terminal</span>
                         <span style={{ color: ZORIN.cyan, marginTop: "8px" }}>Navigation:</span>
                         <span style={{ color: ZORIN.textMuted }}>  cd [page]  - Navigate to page (home, about, projects, blogs, docs, resume)</span>
+                        <span style={{ color: ZORIN.ai, marginTop: "8px" }}>AI Assistant:</span>
+                        <span style={{ color: ZORIN.textMuted }}>  Just type naturally to ask me anything about Ahmed&apos;s work!</span>
+                        <span style={{ color: ZORIN.textMuted }}>  /ai [msg]  - Explicit AI query</span>
                     </div>
                 );
                 break;
@@ -119,8 +240,9 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             case "/socials":
                 output = (
                     <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                        <span style={{ color: ZORIN.textMuted }}>• GitHub: <a href="https://github.com/zenith" target="_blank" style={{ color: ZORIN.cyan, textDecoration: "underline" }}>@zenith</a></span>
-                        <span style={{ color: ZORIN.textMuted }}>• LinkedIn: <a href="https://linkedin.com/in/zenith" target="_blank" style={{ color: ZORIN.cyan, textDecoration: "underline" }}>Ahmed Raza Ansari</a></span>
+                        <span style={{ color: ZORIN.textMuted }}>• GitHub: <a href="https://github.com/AhmedA-afk" target="_blank" style={{ color: ZORIN.cyan, textDecoration: "underline" }}>@AhmedA-afk</a></span>
+                        <span style={{ color: ZORIN.textMuted }}>• LinkedIn: <a href="https://linkedin.com/in/ahmed-1-ansari" target="_blank" style={{ color: ZORIN.cyan, textDecoration: "underline" }}>Ahmed Raza Ansari</a></span>
+                        <span style={{ color: ZORIN.textMuted }}>• Email: ahmedraza1ansari@gmail.com</span>
                     </div>
                 );
                 break;
@@ -133,19 +255,23 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             case "clear":
             case "/clear":
                 setHistory([]);
+                setConversation([]);
                 return;
             case "":
                 output = "";
                 break;
             default:
-                output = <span style={{ color: ZORIN.error }}>Command not found: {trimmedCmd}. Type &apos;/help&apos; for available commands.</span>;
+                // Not a known command - send to AI
+                handleAIQuery(cmd);
+                return;
         }
 
         setHistory((prev) => [...prev, { command: cmd, output }]);
-    };
+    }, [theme, setTheme, router, validPages, handleAIQuery]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (isLoading) return; // Prevent submitting while loading
         handleCommand(input);
         setInput("");
     };
@@ -167,8 +293,8 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                         position: "fixed",
                         top: "50%",
                         left: "50%",
-                        width: "580px",
-                        height: "400px",
+                        width: "620px",
+                        height: "450px",
                         maxWidth: "90vw",
                         maxHeight: "80vh",
                         zIndex: 99999,
@@ -259,9 +385,10 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                             letterSpacing: "0.5px"
                         }}>
                             <span style={{ color: ZORIN.green }}>●</span>
-                            <span>ahmedraza@portfolio</span>
+                            <span>ahmed@portfolio</span>
                             <span style={{ color: ZORIN.purple }}>:</span>
                             <span style={{ color: ZORIN.cyan }}>~</span>
+                            {isLoading && <span style={{ color: ZORIN.ai, marginLeft: "8px" }}>⟳</span>}
                         </div>
 
                         {/* Right: Spacer for balance */}
@@ -284,7 +411,7 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                                 <div key={i} style={{ display: "flex", flexDirection: "column", marginBottom: "8px" }}>
                                     {entry.command && (
                                         <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
-                                            <span style={{ color: ZORIN.green, fontWeight: 700 }}>zenith</span>
+                                            <span style={{ color: ZORIN.green, fontWeight: 700 }}>ahmed</span>
                                             <span style={{ color: ZORIN.textMuted }}>@</span>
                                             <span style={{ color: ZORIN.purple, fontWeight: 600 }}>portfolio</span>
                                             <span style={{ color: ZORIN.textMuted }}>:</span>
@@ -305,44 +432,46 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                             ))}
                         </div>
 
-                        {/* Input Line */}
-                        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "8px" }}>
-                            <span style={{ color: ZORIN.green, fontWeight: 700 }}>zenith</span>
-                            <span style={{ color: ZORIN.textMuted }}>@</span>
-                            <span style={{ color: ZORIN.purple, fontWeight: 600 }}>portfolio</span>
-                            <span style={{ color: ZORIN.textMuted }}>:</span>
-                            <span style={{ color: ZORIN.cyan }}>~</span>
-                            <span style={{ color: ZORIN.textMuted }}>$</span>
-                            <form onSubmit={handleSubmit} style={{ flex: 1, marginLeft: "4px" }}>
-                                <input
-                                    ref={inputRef}
-                                    type="text"
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    style={{
-                                        width: "100%",
-                                        background: "transparent",
-                                        border: "none",
-                                        outline: "none",
-                                        color: ZORIN.text,
-                                        fontFamily: "inherit",
-                                        fontSize: "inherit",
-                                        fontWeight: 500,
-                                        caretColor: ZORIN.green
-                                    }}
-                                    autoFocus
-                                    spellCheck={false}
-                                    autoComplete="off"
-                                />
-                            </form>
-                        </div>
+                        {/* Input Line - hidden while AI is thinking */}
+                        {!isLoading && (
+                            <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "8px" }}>
+                                <span style={{ color: ZORIN.green, fontWeight: 700 }}>ahmed</span>
+                                <span style={{ color: ZORIN.textMuted }}>@</span>
+                                <span style={{ color: ZORIN.purple, fontWeight: 600 }}>portfolio</span>
+                                <span style={{ color: ZORIN.textMuted }}>:</span>
+                                <span style={{ color: ZORIN.cyan }}>~</span>
+                                <span style={{ color: ZORIN.textMuted }}>$</span>
+                                <form onSubmit={handleSubmit} style={{ flex: 1, marginLeft: "4px" }}>
+                                    <input
+                                        ref={inputRef}
+                                        type="text"
+                                        value={input}
+                                        onChange={(e) => setInput(e.target.value)}
+                                        style={{
+                                            width: "100%",
+                                            background: "transparent",
+                                            border: "none",
+                                            outline: "none",
+                                            color: ZORIN.text,
+                                            fontFamily: "inherit",
+                                            fontSize: "inherit",
+                                            fontWeight: 500,
+                                            caretColor: ZORIN.green
+                                        }}
+                                        autoFocus
+                                        spellCheck={false}
+                                        autoComplete="off"
+                                    />
+                                </form>
+                            </div>
+                        )}
                         <div ref={bottomRef} />
                     </div>
 
                     {/* Bottom gradient line accent */}
                     <div style={{
                         height: "2px",
-                        background: `linear-gradient(90deg, ${ZORIN.green}, ${ZORIN.purple}, ${ZORIN.cyan})`
+                        background: `linear-gradient(90deg, ${ZORIN.green}, ${ZORIN.ai}, ${ZORIN.purple}, ${ZORIN.cyan})`
                     }} />
                 </motion.div>
             )}
