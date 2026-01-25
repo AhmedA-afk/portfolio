@@ -7,6 +7,9 @@ import { Footer } from "@/components/footer";
 export const metadata: Metadata = {
   title: "Ahmed Ansari | AI/ML Engineer",
   description: "Portfolio of Ahmed Ansari - AI/ML Engineer specializing in LLMs, Generative AI, and Agentic Systems.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

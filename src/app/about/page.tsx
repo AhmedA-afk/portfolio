@@ -5,6 +5,7 @@ function TimelineItem({
     company,
     date,
     description,
+    bullets,
     isLast = false,
     type = "work" // "work" or "education"
 }: {
@@ -13,6 +14,7 @@ function TimelineItem({
     company: string;
     date: string;
     description?: string;
+    bullets?: string[];
     isLast?: boolean;
     type?: "work" | "education";
 }) {
@@ -113,6 +115,21 @@ function TimelineItem({
                         {description}
                     </p>
                 )}
+
+                {/* Bullet Points */}
+                {bullets && bullets.length > 0 && (
+                    <ul style={{
+                        fontSize: "0.9rem",
+                        color: "var(--text-secondary)",
+                        lineHeight: 1.8,
+                        marginTop: "12px",
+                        paddingLeft: "20px"
+                    }}>
+                        {bullets.map((bullet, index) => (
+                            <li key={index} style={{ marginBottom: "6px" }}>{bullet}</li>
+                        ))}
+                    </ul>
+                )}
             </div>
         </div>
     );
@@ -129,10 +146,13 @@ export default function About() {
                 </h1>
                 <div className="glass-panel" style={{ padding: "2.5rem", borderRadius: "24px", textAlign: "left", lineHeight: "1.8", fontSize: "1.1rem" }}>
                     <p style={{ marginBottom: "1.5rem" }}>
-                        B.Tech in CSE @ CSPIT - CHARUSAT | Diploma in IT @ Lukhdhirji Engineering College - Morbi | Preferred Languages - Python/C++ | Current Area of Focus : Machine Learning Model Development and Generative AI.
+                        <strong>Applied GenAI / AI Systems Engineer</strong> with 1.5+ years of experience building and deploying LLM-powered systems, automation platforms, and internal AI tools in production environments.
+                    </p>
+                    <p style={{ marginBottom: "1.5rem", color: "var(--text-secondary)" }}>
+                        B.Tech in CSE @ CSPIT - CHARUSAT | Diploma in IT @ Lukhdhirji Engineering College - Morbi | Strong focus on <strong>GenAI, RAG systems, multi-agent architectures, and AI enablement</strong> across business functions.
                     </p>
                     <p style={{ color: "var(--text-secondary)" }}>
-                        I am a passionate AI/ML Engineer with a strong foundation in computer science and a deep interest in the latest advancements in artificial intelligence. My professional journey has been driven by a curiosity to solve complex problems through data-driven insights and innovative algorithms.
+                        I don&apos;t just build cool demos — I translate real organizational pain points into scalable AI solutions. My work spans LLM platforms, automation workflows, and cross-functional AI transformation initiatives.
                     </p>
                 </div>
             </section>
@@ -149,15 +169,26 @@ export default function About() {
                         subtitle="Full-time"
                         company="Motadata (MindArray Systems Pvt. Ltd.) • Ahmedabad, India"
                         date="Jun 2025 - Present"
-                        description="Focusing on next-generation AI-enabled products and enterprise solutions. Building intelligent systems for IT operations and service management."
+                        bullets={[
+                            "Designed and deployed LLM-powered internal platforms using RAG (Weaviate, PGVector) for Sales, Operations, and QA teams.",
+                            "Built an internal MCP-based multi-agent AI platform (on Agno) supporting document Q&A, ticket resolution, and automated test-case generation.",
+                            "Developed single-agent, multi-agent, and hierarchical agent systems with orchestration, access control, and logging.",
+                            "Built an end-to-end Hardware & BOQ system reducing 2 days of manual work to 2 hours for Sales/Presales teams.",
+                            "Implemented WhatsApp ticket automation serving ~200 customers with 10–20 tickets/day using Meta APIs and n8n."
+                        ]}
                     />
                     <TimelineItem
                         type="work"
-                        title="AI/ML Engineer Intern (R&D)"
+                        title="R&D AI Engineer (Intern → Full-Time)"
                         subtitle="Internship"
                         company="Motadata • Ahmedabad, India"
                         date="Aug 2024 - May 2025"
-                        description="Working as an AI-ML Engineer in R&D team of PMG Department. Focused on developing leading LLM Platform for interacting with DB and generating relevant answers in sub-seconds within the call initiation. The task involves in making the Motadata ServiceOps ITSM Portal AI enabled where clients can interact with the product through LLM based ChatBot."
+                        bullets={[
+                            "Conducted deep research on Text2SQL systems (schema grounding, query planning, execution strategies).",
+                            "Evaluated automation frameworks (n8n, Dify, Zapier-class) for enterprise AI workflow suitability.",
+                            "Built multi-agent automated blog generation pipeline publishing 2-3 external blogs/week.",
+                            "Led architectural analysis of MoveWorks (closed-source) to inform internal product strategy."
+                        ]}
                     />
                     <TimelineItem
                         type="work"
@@ -165,17 +196,36 @@ export default function About() {
                         subtitle="Internship"
                         company="Trionic Technologies LLP • Remote"
                         date="May 2024 - Jun 2024"
-                        description="Worked on localization of LLM model and repurpose it for specific use-case of question generation. Used HuggingFace model space to explore models and pretrained using Mistral 7b v0.3 Instruct model and hosted it GGUF counterpart using Ollama and LMStudio."
+                        description="Worked on LLM localization using Mistral 7b v0.3 Instruct model, hosted via Ollama/LMStudio with Docker containerization for cross-platform deployment."
                     />
                     <TimelineItem
                         type="work"
                         title="Forage Virtual Intern"
-                        subtitle="Virtual Experience"
-                        company="Forage • Remote"
+                        subtitle="7 Micro-Internships"
+                        company="VISA, AWS, Goldman Sachs, Quantium, Deloitte, British Airways, Accenture"
                         date="May 2023 - Jun 2023"
-                        description="Completed 7 micro-internships on Forage from different companies and domains including VISA, AWS, Goldman Sachs, Quantium, Deloitte, British Airways and Accenture."
+                        description="Completed internships across API Development, Solutions Architecture, Cyber Security, Data Analysis, and Software Development Infrastructure."
                         isLast={true}
                     />
+                </div>
+            </section>
+
+            {/* AI Transformation Section */}
+            <section style={{ marginBottom: "5rem" }}>
+                <h2 className="gradient-text" style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "2rem" }}>
+                    AI Transformation & Enablement
+                </h2>
+                <div className="glass-panel" style={{ padding: "2rem", borderRadius: "20px" }}>
+                    <p style={{ fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+                        Worked directly under <strong>CEO, COO, AIOps Manager, and ServiceOps Manager</strong> to drive organization-wide AI transformation initiatives.
+                    </p>
+                    <ul style={{ color: "var(--text-secondary)", lineHeight: 2, fontSize: "0.95rem", paddingLeft: "20px" }}>
+                        <li>Conducted 1:1 discovery sessions with 9 departments to identify pain points and automation opportunities</li>
+                        <li>Designed and delivered cross-department AI enablement sessions focused on practical, outcome-driven usage</li>
+                        <li>Created and distributed AI enablement packages (guides, tools, workflows) for different business functions</li>
+                        <li>Established monthly internal AI newsletters highlighting relevant tools, frameworks, and use cases</li>
+                        <li>Personally built complex AI systems where requirements exceeded self-serve capabilities</li>
+                    </ul>
                 </div>
             </section>
 
@@ -209,19 +259,19 @@ export default function About() {
             <section>
                 <h2 className="gradient-text" style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "2rem" }}>Tech Stack</h2>
                 <div className="glass-panel" style={{ padding: "2rem", borderRadius: "20px" }}>
-                    <div style={{ display: "grid", gap: "2.5rem", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))" }}>
+                    <div style={{ display: "grid", gap: "2.5rem", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
 
                         <div>
                             <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem", color: "var(--foreground)", display: "flex", alignItems: "center", gap: "8px" }}>
                                 <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#15c860" }} />
-                                Languages
+                                GenAI / LLMs
                             </h3>
                             <ul style={{ color: "var(--text-secondary)", lineHeight: "2", listStyle: "none", fontSize: "0.95rem" }}>
-                                <li>Python</li>
-                                <li>C++</li>
-                                <li>JavaScript / TypeScript</li>
-                                <li>HTML5 / CSS3</li>
-                                <li>Shell Script</li>
+                                <li>RAG Systems & Text2SQL</li>
+                                <li>Multi-Agent Architectures</li>
+                                <li>LangChain / LlamaIndex</li>
+                                <li>Prompt Engineering</li>
+                                <li>Agent Orchestration</li>
                             </ul>
                         </div>
 
@@ -232,33 +282,35 @@ export default function About() {
                             </h3>
                             <ul style={{ color: "var(--text-secondary)", lineHeight: "2", listStyle: "none", fontSize: "0.95rem" }}>
                                 <li>TensorFlow / PyTorch</li>
-                                <li>Keras / Scikit-learn</li>
-                                <li>Pandas / NumPy</li>
-                                <li>Matplotlib / SciPy</li>
+                                <li>Vector Databases</li>
+                                <li>Embeddings & Evaluation</li>
+                                <li>Model Development</li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem", color: "var(--foreground)", display: "flex", alignItems: "center", gap: "8px" }}>
                                 <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00d4aa" }} />
-                                Tools & Cloud
+                                Automation & Infra
                             </h3>
                             <ul style={{ color: "var(--text-secondary)", lineHeight: "2", listStyle: "none", fontSize: "0.95rem" }}>
+                                <li>n8n / Dify / MCP Frameworks</li>
                                 <li>Docker / Kubernetes</li>
-                                <li>AWS / Google Cloud / Azure</li>
-                                <li>Git / Postman</li>
+                                <li>Weaviate / PGVector</li>
+                                <li>PostgreSQL / MongoDB</li>
                             </ul>
                         </div>
 
                         <div>
                             <h3 style={{ fontSize: "1rem", fontWeight: 600, marginBottom: "1rem", color: "var(--foreground)", display: "flex", alignItems: "center", gap: "8px" }}>
                                 <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#f39c12" }} />
-                                Frameworks
+                                Languages & Cloud
                             </h3>
                             <ul style={{ color: "var(--text-secondary)", lineHeight: "2", listStyle: "none", fontSize: "0.95rem" }}>
-                                <li>React / Next.js</li>
-                                <li>Node.js / Django / Flask</li>
-                                <li>PostgreSQL / MongoDB</li>
+                                <li>Python / C++</li>
+                                <li>JavaScript / TypeScript</li>
+                                <li>AWS / GCP / Azure</li>
+                                <li>Git / Postman</li>
                             </ul>
                         </div>
 
