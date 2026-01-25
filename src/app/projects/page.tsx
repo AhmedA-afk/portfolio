@@ -1,4 +1,18 @@
+import { Metadata } from 'next';
 import { ProjectCard } from "@/components/project-card";
+
+export const metadata: Metadata = {
+    title: "Projects | Ahmed Ansari",
+    description: "Showcase of AI/ML projects including internal platforms, automation tools, and open-source contributions by Ahmed Ansari.",
+    openGraph: {
+        title: "Projects | Ahmed Ansari",
+        description: "Explore Ahmed Ansari's portfolio of RAG systems, Multi-Agent architectures, and Automation tools.",
+        url: "https://ahmedansari.me/projects",
+    },
+    alternates: {
+        canonical: "https://ahmedansari.me/projects",
+    },
+};
 
 const projects = [
     {

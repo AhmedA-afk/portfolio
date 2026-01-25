@@ -1,3 +1,18 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Resume | Ahmed Ansari",
+    description: "View or download Ahmed Ansari's professional resume. AI/ML Engineer with experience in LLMs and Automation.",
+    openGraph: {
+        title: "Resume | Ahmed Ansari",
+        description: "Professional resume of Ahmed Ansari - Applied GenAI / AI Systems Engineer.",
+        url: "https://ahmedansari.me/resume",
+    },
+    alternates: {
+        canonical: "https://ahmedansari.me/resume",
+    },
+};
+
 export default function Resume() {
     return (
         <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto", width: "100%", height: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>

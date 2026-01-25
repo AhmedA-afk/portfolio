@@ -1,3 +1,18 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "About Ahmed Ansari | AI/ML Engineer",
+    description: "Learn about Ahmed Ansari's experience as an AI/ML Engineer, background in GenAI, and work at Motadata.",
+    openGraph: {
+        title: "About Ahmed Ansari | AI/ML Engineer",
+        description: "Applied GenAI / AI Systems Engineer with experience in building production LLM systems.",
+        url: "https://ahmedansari.me/about",
+    },
+    alternates: {
+        canonical: "https://ahmedansari.me/about",
+    },
+};
+
 // LinkedIn-style Timeline Item Component
 function TimelineItem({
     title,
