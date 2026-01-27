@@ -63,7 +63,6 @@ export function Footer() {
             </div>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem" }}>
                 <p style={{ fontSize: "0.9rem" }}>© 2026 Ahmed Ansari. All rights reserved.</p>
-                <p style={{ fontSize: "0.8rem", opacity: 0.7 }}>Built with Next.js 16 & Gemini AI</p>
             </div>
         </footer>
     );
