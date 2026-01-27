@@ -261,9 +261,13 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                 output = "";
                 break;
             default:
-                // Not a known command - send to AI
-                handleAIQuery(cmd);
-                return;
+                output = (
+                    <span style={{ color: ZORIN.error }}>
+                        Command not found: {cmd}. <br />
+                        Type <span style={{ color: ZORIN.cyan }}>/help</span> for commands or <span style={{ color: ZORIN.ai }}>/ai [query]</span> to ask the assistant.
+                    </span>
+                );
+                break;
         }
 
         setHistory((prev) => [...prev, { command: cmd, output }]);

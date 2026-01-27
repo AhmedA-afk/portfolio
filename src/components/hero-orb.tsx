@@ -12,10 +12,7 @@ type PerformanceTier = "high" | "medium" | "low";
 function detectPerformanceTier(): PerformanceTier {
     if (typeof window === "undefined") return "medium";
 
-    // Check for reduced motion preference - instant low tier
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
-        return "low";
-    }
+
 
     // 1. Hardware Constraints (Memory & Cores)
     const nav = navigator as Navigator & { deviceMemory?: number };
@@ -121,18 +118,22 @@ function isMobileDevice() {
 }
 
 // High quality orb with MeshTransmissionMaterial
-function HighQualityBlob({ isDark }: { isDark: boolean }) {
+function HighQualityBlob({ isDark, reduceMotion }: { isDark: boolean; reduceMotion: boolean }) {
     const meshRef = useRef<THREE.Mesh>(null);
 
     useFrame((state) => {
-        if (!meshRef.current) return;
+        if (!meshRef.current || reduceMotion) return;
         const time = state.clock.getElapsedTime();
         meshRef.current.rotation.x = time * 0.15;
         meshRef.current.rotation.y = time * 0.2;
     });
 
     return (
-        <Float speed={1.5} rotationIntensity={1} floatIntensity={1.5}>
+        <Float 
+            speed={reduceMotion ? 0 : 1.5} 
+            rotationIntensity={reduceMotion ? 0 : 1} 
+            floatIntensity={reduceMotion ? 0 : 1.5}
+        >
             <mesh ref={meshRef} scale={2.2}>
                 <sphereGeometry args={[1, 64, 64]} />
                 <MeshTransmissionMaterial
@@ -159,18 +160,22 @@ function HighQualityBlob({ isDark }: { isDark: boolean }) {
 }
 
 // Medium quality orb - reduced transmission settings
-function MediumQualityBlob({ isDark }: { isDark: boolean }) {
+function MediumQualityBlob({ isDark, reduceMotion }: { isDark: boolean; reduceMotion: boolean }) {
     const meshRef = useRef<THREE.Mesh>(null);
 
     useFrame((state) => {
-        if (!meshRef.current) return;
+        if (!meshRef.current || reduceMotion) return;
         const time = state.clock.getElapsedTime();
         meshRef.current.rotation.x = time * 0.15;
         meshRef.current.rotation.y = time * 0.2;
     });
 
     return (
-        <Float speed={1.5} rotationIntensity={0.8} floatIntensity={1}>
+        <Float 
+            speed={reduceMotion ? 0 : 1.5} 
+            rotationIntensity={reduceMotion ? 0 : 0.8} 
+            floatIntensity={reduceMotion ? 0 : 1}
+        >
             <mesh ref={meshRef} scale={2.2}>
                 <sphereGeometry args={[1, 48, 48]} />
                 <MeshTransmissionMaterial
@@ -195,18 +200,22 @@ function MediumQualityBlob({ isDark }: { isDark: boolean }) {
 }
 
 // Low quality orb - uses basic MeshStandardMaterial (no transmission/refraction overhead)
-function LowQualityBlob({ isDark }: { isDark: boolean }) {
+function LowQualityBlob({ isDark, reduceMotion }: { isDark: boolean; reduceMotion: boolean }) {
     const meshRef = useRef<THREE.Mesh>(null);
 
     useFrame((state) => {
-        if (!meshRef.current) return;
+        if (!meshRef.current || reduceMotion) return;
         const time = state.clock.getElapsedTime();
         meshRef.current.rotation.x = time * 0.1;
         meshRef.current.rotation.y = time * 0.15;
     });
 
     return (
-        <Float speed={1} rotationIntensity={0.5} floatIntensity={0.8}>
+        <Float 
+            speed={reduceMotion ? 0 : 1} 
+            rotationIntensity={reduceMotion ? 0 : 0.5} 
+            floatIntensity={reduceMotion ? 0 : 0.8}
+        >
             <mesh ref={meshRef} scale={2.2}>
                 <sphereGeometry args={[1, 32, 32]} />
                 <meshStandardMaterial
@@ -223,14 +232,14 @@ function LowQualityBlob({ isDark }: { isDark: boolean }) {
 }
 
 // Adaptive blob that switches based on performance
-function AdaptiveBlob({ tier, isDark }: { tier: PerformanceTier; isDark: boolean }) {
+function AdaptiveBlob({ tier, isDark, reduceMotion }: { tier: PerformanceTier; isDark: boolean; reduceMotion: boolean }) {
     switch (tier) {
         case "high":
-            return <HighQualityBlob isDark={isDark} />;
+            return <HighQualityBlob isDark={isDark} reduceMotion={reduceMotion} />;
         case "medium":
-            return <MediumQualityBlob isDark={isDark} />;
+            return <MediumQualityBlob isDark={isDark} reduceMotion={reduceMotion} />;
         case "low":
-            return <LowQualityBlob isDark={isDark} />;
+            return <LowQualityBlob isDark={isDark} reduceMotion={reduceMotion} />;
     }
 }
 
@@ -286,9 +295,14 @@ export function HeroOrb() {
     const [hasError, setHasError] = useState(false);
     const [performanceTier, setPerformanceTier] = useState<PerformanceTier>("medium");
     const [forcedDegradation, setForcedDegradation] = useState(false);
+    const [reduceMotion, setReduceMotion] = useState(false);
 
     useEffect(() => {
         setMounted(true);
+        // Check for reduced motion preference
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        setReduceMotion(mediaQuery.matches);
+
         // Detect performance tier on mount
         const tier = detectPerformanceTier();
         setPerformanceTier(tier);
@@ -369,7 +383,7 @@ export function HeroOrb() {
                         <Lightformer intensity={4} color="#fff" position={[0, 0, -10]} scale={[10, 10, 1]} />
                     </Environment>
 
-                    <AdaptiveBlob tier={performanceTier} isDark={isDark} />
+                    <AdaptiveBlob tier={performanceTier} isDark={isDark} reduceMotion={reduceMotion} />
                 </Suspense>
 
                 <ambientLight intensity={0.4} />
