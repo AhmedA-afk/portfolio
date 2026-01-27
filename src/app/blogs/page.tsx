@@ -67,8 +67,7 @@ const jsonLd = {
                     "headline": blog.title,
                     "description": blog.excerpt,
                     "author": {
-                        "@type": "Person",
-                        "name": "Ahmed Ansari"
+                        "@id": "https://ahmedansari.me/#person"
                     },
                     "url": blog.slug !== '#' ? blog.slug : undefined,
                     "datePublished": blog.date !== "Coming Soon" ? "2024-01-01" : undefined

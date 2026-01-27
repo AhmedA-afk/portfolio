@@ -80,18 +80,25 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      "name": "Ahmed Ansari Portfolio",
+      "@id": "https://ahmedansari.me/#website",
       "url": "https://ahmedansari.me",
-      "author": {
-        "@type": "Person",
-        "name": "Ahmed Raza Ansari"
+      "name": "Ahmed Ansari Portfolio",
+      "publisher": {
+        "@id": "https://ahmedansari.me/#person"
       }
     },
     {
       "@type": "Person",
+      "@id": "https://ahmedansari.me/#person",
       "name": "Ahmed Raza Ansari",
       "jobTitle": "AI/ML Engineer",
       "url": "https://ahmedansari.me",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://ahmedansari.me/#logo",
+        "url": "https://ahmedansari.me/favicon-96x96.png",
+        "caption": "Ahmed Ansari"
+      },
       "sameAs": [
         "https://linkedin.com/in/ahmed-1-ansari",
         "https://github.com/AhmedA-afk",
@@ -99,7 +106,9 @@ const jsonLd = {
       ],
       "worksFor": {
         "@type": "Organization",
-        "name": "Motadata (MindArray Systems Pvt. Ltd.)"
+        "@id": "https://ahmedansari.me/#organization",
+        "name": "Motadata (MindArray Systems Pvt. Ltd.)",
+        "url": "https://www.motadata.com"
       },
       "knowsAbout": ["Artificial Intelligence", "Machine Learning", "LLMs", "Generative AI", "RAG", "Agentic Systems"]
     }

@@ -95,8 +95,7 @@ const jsonLd = {
                     "programmingLanguage": project.tags.join(", "),
                     "codeRepository": project.github || undefined,
                     "author": {
-                        "@type": "Person",
-                        "name": "Ahmed Ansari"
+                        "@id": "https://ahmedansari.me/#person"
                     }
                 }
             }))
