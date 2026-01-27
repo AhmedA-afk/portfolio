@@ -10,8 +10,23 @@ const HeroOrb = dynamic(() => import("@/components/hero-orb").then((mod) => mod.
 });
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://ahmedansari.me/#webpage",
+    "url": "https://ahmedansari.me",
+    "name": "Ahmed Ansari - AI/ML Engineer Portfolio",
+    "description": "Portfolio of Ahmed Ansari, an AI/ML Engineer specializing in LLMs, Generative AI, and Agentic Systems.",
+    "isPartOf": { "@id": "https://ahmedansari.me/#website" },
+    "about": { "@id": "https://ahmedansari.me/#person" }
+  };
+
   return (
     <div className={styles.main}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <HeroOrb />
 
       <header className={styles.hero} style={{ position: 'relative', zIndex: 10 }}>
