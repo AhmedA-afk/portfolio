@@ -66,9 +66,51 @@ const projects = [
     }
 ];
 
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ahmedansari.me"
+            }, {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Projects",
+                "item": "https://ahmedansari.me/projects"
+            }]
+        },
+        {
+            "@type": "ItemList",
+            "itemListElement": projects.map((project, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                    "@type": "SoftwareSourceCode",
+                    "name": project.title,
+                    "description": project.description,
+                    "programmingLanguage": project.tags.join(", "),
+                    "codeRepository": project.github || undefined,
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ahmed Ansari"
+                    }
+                }
+            }))
+        }
+    ]
+};
+
 export default function Projects() {
     return (
         <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto", width: "100%" }}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <header style={{ marginBottom: "4rem", textAlign: "center" }}>
                 <h1 className="gradient-text animate-fade-in" style={{ fontSize: "3rem", fontWeight: 800, marginBottom: "1rem" }}>
                     Selected Works

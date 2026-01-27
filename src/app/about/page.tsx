@@ -150,9 +150,58 @@ function TimelineItem({
     );
 }
 
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "ProfilePage",
+            "mainEntity": {
+                "@type": "Person",
+                "name": "Ahmed Raza Ansari",
+                "jobTitle": "AI/ML Engineer",
+                "worksFor": {
+                    "@type": "Organization",
+                    "name": "Motadata (MindArray Systems Pvt. Ltd.)"
+                },
+                "sameAs": [
+                    "https://linkedin.com/in/ahmed-1-ansari",
+                    "https://github.com/AhmedA-afk",
+                    "https://linktr.ee/ahmed1ansari"
+                ]
+            }
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Who is Ahmed Ansari?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ahmed Ansari is an AI/ML Engineer specializing in Large Language Models (LLMs), Generative AI, and Agentic Systems, currently working at Motadata (MindArray Systems Pvt. Ltd.) in Ahmedabad, India."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What does Ahmed Ansari do?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ahmed specializes in building autonomous AI agents, RAG systems, and enterprise automation pipelines using tools like Python, LangChain, Agno, and PGVector."
+                    }
+                }
+            ]
+        }
+    ]
+};
+
 export default function About() {
     return (
         <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", width: "100%" }}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+
 
             {/* Bio Section */}
             <section style={{ marginBottom: "5rem", textAlign: "center" }}>

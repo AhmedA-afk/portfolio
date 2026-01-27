@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ title, description, tags, link }: ProjectCardProps) {
     return (
-        <div className="glass-card" style={{ padding: 0, height: "100%", display: "flex", flexDirection: "column" }}>
+        <article className="glass-card" style={{ padding: 0, height: "100%", display: "flex", flexDirection: "column" }}>
             <div style={{ padding: "2rem", display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
                 <div>
                     <h3 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>{title}</h3>
@@ -35,6 +35,6 @@ export function ProjectCard({ title, description, tags, link }: ProjectCardProps
                     ))}
                 </div>
             </div>
-        </div>
+        </article>
     );
 }

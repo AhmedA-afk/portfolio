@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ahmedansari.me"),
   title: "Ahmed Ansari : Portfolio - AI/ML Engineer",
   description: "Portfolio of Ahmed Ansari - AI/ML Engineer specializing in LLMs, Generative AI, and Agentic Systems.",
   keywords: ["Ahmed Ansari", "AI Engineer", "AI/ML Engineer", "GenAI", "LLM Engineer", "Machine Learning", "Ahmedabad", "Portfolio", "Motadata", "RAG Systems"],
@@ -88,6 +89,10 @@ const jsonLd = {
   "knowsAbout": ["Artificial Intelligence", "Machine Learning", "LLMs", "Generative AI", "RAG", "Agentic Systems"]
 };
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -95,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className={inter.className}>
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="light"

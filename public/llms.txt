@@ -1,0 +1,48 @@
+# Ahmed Ansari
+
+## AI/ML Engineer | Generative AI & Agentic Systems Specialist
+
+**Ahmed Ansari** is an AI/ML Engineer specializing in Large Language Models (LLMs), Generative AI, and Agentic Systems. He currently works at **Motadata (MindArray Systems Pvt. Ltd.)**, where he builds autonomous AI agents and production-ready scalable AI solutions. He is known for turning organizational pain points into automated, efficient systems.
+
+> **Primary Website**: [https://ahmedansari.me](https://ahmedansari.me)
+> **Location**: Ahmedabad, Gujarat, India
+
+### Connect
+*   **LinkedIn**: [ahmed-1-ansari](https://linkedin.com/in/ahmed-1-ansari)
+*   **GitHub**: [AhmedA-afk](https://github.com/AhmedA-afk)
+*   **Email**: [ahmedraza1ansari@gmail.com](mailto:ahmedraza1ansari@gmail.com)
+*   **Linktree**: [ahmed1ansari](https://linktr.ee/ahmed1ansari)
+
+### Professional Summary
+Ahmed focuses on the intersection of RAG (Retrieval-Augmented Generation), Multi-Agent architectures, and Enterprise Automation. His work involves localizing LLMs (Mistral, LLaMA) for secure inference and building end-to-end AI platforms that integrate with existing IT Operations (ITOps) tools.
+
+### Key Projects & Work
+1.  **Internal MCP/Agno Platform (OneLayer)**
+    *   *Description*: A Multi-agent platform for querying documentation and tickets using RAG and PGVector.
+    *   *Tech*: Agno, RAG, Multi-Agent, PGVector.
+
+2.  **Hardware & BOQ Calculator**
+    *   *Description*: Automated sales Presales workflow, reducing manual work from 2 days to 2 hours.
+    *   *Tech*: Python, Automation, Full-Stack.
+
+3.  **ServiceOps AI Copilot**
+    *   *Description*: NL2SQL and RAG-based chatbot for ITSM portals.
+    *   *Tech*: LLMs, Python, RAG, Text2SQL.
+
+4.  **Local LLM Inference Lab**
+    *   *Description*: R&D on localizing Mistral 7b models using GGUF and Ollama.
+    *   *Tech*: Mistral 7B, GGUF, Docker, Ollama.
+
+5.  **Multi-Agent Blog Generation Pipeline**
+    *   *Description*: Automated content generation system for marketing teams.
+    *   *Tech*: Multi-Agent, LLMs, Content Automation.
+
+### Technical Skills
+*   **Core**: Artificial Intelligence, Machine Learning, Deep Learning, Data Structures & Algorithms.
+*   **LLMs & GenAI**: RAG pipelines, Chain-of-Thought Prompting, Fine-tuning, Quantization (GGUF), LangChain, LlamaIndex.
+*   **Languages**: Python (Expert), TypeScript, JavaScript.
+*   **Tools**: Docker, Git, Next.js, PostgreSQL/PGVector, Vector Databases.
+
+### Publications & Writing
+Ahmed writes about the future of AI in education, LLM quantization, and agentic workflows on Medium and his personal blog.
+*   [How can GenAI improve and reform the education sector?](https://medium.com/@ahmedraza1ansari/how-can-genai-improve-and-reform-the-education-sector-instead-of-ruining-it-763cdadb5c20)

@@ -40,9 +40,51 @@ const blogs = [
     }
 ];
 
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://ahmedansari.me"
+            }, {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blogs",
+                "item": "https://ahmedansari.me/blogs"
+            }]
+        },
+        {
+            "@type": "ItemList",
+            "itemListElement": blogs.map((blog, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "item": {
+                    "@type": "BlogPosting",
+                    "headline": blog.title,
+                    "description": blog.excerpt,
+                    "author": {
+                        "@type": "Person",
+                        "name": "Ahmed Ansari"
+                    },
+                    "url": blog.slug !== '#' ? blog.slug : undefined,
+                    "datePublished": blog.date !== "Coming Soon" ? "2024-01-01" : undefined
+                }
+            }))
+        }
+    ]
+};
+
 export default function Blogs() {
     return (
         <div style={{ padding: "2rem", maxWidth: "1000px", margin: "0 auto", width: "100%" }}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <header style={{ marginBottom: "4rem", textAlign: "center" }}>
                 <h1 className="gradient-text animate-fade-in" style={{ fontSize: "3rem", fontWeight: 800, marginBottom: "1rem" }}>
                     Insights

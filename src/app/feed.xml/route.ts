@@ -1,0 +1,37 @@
+import { Feed } from 'feed';
+import { projects } from './projects/data'; // We'll need to externalize data eventually, but for now we might need to duplicate or fetch. 
+// Actually, let's just make a simple feed with hardcoded crucial items or move data to a shared file later.
+// For now, I will define a few key items to verify the feed generation works.
+
+export async function GET() {
+    const feed = new Feed({
+        title: "Ahmed Ansari - AI/ML Engineer",
+        description: "Thoughts on AI, LLMs, and Agentic Systems.",
+        id: "https://ahmedansari.me/",
+        link: "https://ahmedansari.me/",
+        language: "en",
+        image: "https://ahmedansari.me/favicon.png",
+        favicon: "https://ahmedansari.me/favicon.ico",
+        copyright: "All rights reserved 2026, Ahmed Ansari",
+        author: {
+            name: "Ahmed Ansari",
+            email: "ahmedraza1ansari@gmail.com",
+            link: "https://ahmedansari.me"
+        }
+    });
+
+    // Add recent "blogs" (even if external)
+    feed.addItem({
+        title: "How can GenAI improve and reform the education sector?",
+        id: "https://medium.com/@ahmedraza1ansari/how-can-genai-improve-and-reform-the-education-sector-instead-of-ruining-it-763cdadb5c20",
+        link: "https://medium.com/@ahmedraza1ansari/how-can-genai-improve-and-reform-the-education-sector-instead-of-ruining-it-763cdadb5c20",
+        description: "Exploring the transformative potential of Generative AI in education.",
+        date: new Date("2024-01-01"),
+    });
+
+    return new Response(feed.rss2(), {
+        headers: {
+            'Content-Type': 'application/xml; charset=utf-8',
+        },
+    });
+}
