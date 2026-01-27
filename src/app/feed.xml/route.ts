@@ -1,7 +1,5 @@
 import { Feed } from 'feed';
-import { projects } from './projects/data'; // We'll need to externalize data eventually, but for now we might need to duplicate or fetch. 
-// Actually, let's just make a simple feed with hardcoded crucial items or move data to a shared file later.
-// For now, I will define a few key items to verify the feed generation works.
+
 
 export async function GET() {
     const feed = new Feed({
