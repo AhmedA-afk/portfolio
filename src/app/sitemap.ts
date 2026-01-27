@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/blogs'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date(),
+        lastModified: new Date('2025-01-27'),
         changeFrequency: 'weekly' as const,
         priority: route === '' ? 1 : 0.8,
     }))

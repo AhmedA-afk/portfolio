@@ -50,6 +50,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://ahmedansari.me",
+    languages: {
+      'en-US': 'https://ahmedansari.me',
+      'x-default': 'https://ahmedansari.me',
+    },
   },
   appleWebApp: {
     capable: true,
@@ -73,20 +77,33 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ahmed Raza Ansari",
-  "jobTitle": "AI/ML Engineer",
-  "url": "https://ahmedansari.me",
-  "sameAs": [
-    "https://linkedin.com/in/ahmed-1-ansari",
-    "https://github.com/AhmedA-afk",
-    "https://linktr.ee/ahmed1ansari"
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Motadata (MindArray Systems Pvt. Ltd.)"
-  },
-  "knowsAbout": ["Artificial Intelligence", "Machine Learning", "LLMs", "Generative AI", "RAG", "Agentic Systems"]
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Ahmed Ansari Portfolio",
+      "url": "https://ahmedansari.me",
+      "author": {
+        "@type": "Person",
+        "name": "Ahmed Raza Ansari"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Ahmed Raza Ansari",
+      "jobTitle": "AI/ML Engineer",
+      "url": "https://ahmedansari.me",
+      "sameAs": [
+        "https://linkedin.com/in/ahmed-1-ansari",
+        "https://github.com/AhmedA-afk",
+        "https://linktr.ee/ahmed1ansari"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Motadata (MindArray Systems Pvt. Ltd.)"
+      },
+      "knowsAbout": ["Artificial Intelligence", "Machine Learning", "LLMs", "Generative AI", "RAG", "Agentic Systems"]
+    }
+  ]
 };
 
 import { Inter } from "next/font/google";
