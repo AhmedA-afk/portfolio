@@ -35,7 +35,7 @@ export default function Home() {
           Ahmed Raza Ansari
         </h1>
         <p className={styles.subtitle}>
-          Building <strong>LLM-powered systems</strong>, <strong>multi-agent platforms</strong>, and <strong>AI automation</strong> in production.<br />
+          AI/ML Engineer specializing in <strong>LLMs</strong>, <strong>Generative AI</strong>, and <strong>Agentic Systems</strong>.<br />
           I turn organizational pain points into scalable AI solutions.
         </p>
 

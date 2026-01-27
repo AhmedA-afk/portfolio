@@ -5,7 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Ahmed Ansari | AI/ML Engineer",
+  title: "Ahmed Ansari : Portfolio - AI/ML Engineer",
   description: "Portfolio of Ahmed Ansari - AI/ML Engineer specializing in LLMs, Generative AI, and Agentic Systems.",
   keywords: ["Ahmed Ansari", "AI Engineer", "AI/ML Engineer", "GenAI", "LLM Engineer", "Machine Learning", "Ahmedabad", "Portfolio", "Motadata", "RAG Systems"],
   authors: [{ name: "Ahmed Raza Ansari" }],
@@ -23,10 +23,13 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
   },
   openGraph: {
-    title: "Ahmed Ansari | AI/ML Engineer",
+    title: "Ahmed Ansari : Portfolio - AI/ML Engineer",
     description: "Building autonomous AI agents and production-ready LLM systems.",
     url: "https://ahmedansari.me",
     siteName: "Ahmed Ansari Portfolio",
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ahmed Ansari | AI/ML Engineer",
+    title: "Ahmed Ansari : Portfolio - AI/ML Engineer",
     description: "Building autonomous AI agents and production-ready LLM systems.",
     creator: "@AhmedA-afk",
   },
