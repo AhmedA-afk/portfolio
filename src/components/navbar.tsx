@@ -26,6 +26,7 @@ export function Navbar() {
     const pathname = usePathname();
     const [isTerminalOpen, setIsTerminalOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [hasOpened, setHasOpened] = useState(false); // Optimization: Only load Terminal chunk after first click
 
     return (
         <>
@@ -139,7 +140,10 @@ export function Navbar() {
                 {/* Action Buttons */}
                 <div style={{ display: "flex", alignItems: "center", gap: "8px", zIndex: 1002 }}>
                     <button
-                        onClick={() => setIsTerminalOpen(!isTerminalOpen)}
+                        onClick={() => {
+                            if (!hasOpened) setHasOpened(true);
+                            setIsTerminalOpen(!isTerminalOpen);
+                        }}
                         className="glass-button"
                         aria-label="Toggle Terminal"
                         style={{
@@ -154,7 +158,7 @@ export function Navbar() {
                     <ThemeToggle />
                 </div>
             </nav>
-            <Terminal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+            {hasOpened && <Terminal isOpen={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />}
         </>
     );
 }

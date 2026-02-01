@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   },
   // Experimental optimizations
   experimental: {
-    // Optimize CSS - helps with render-blocking CSS
+    // Optimize CSS - helps with render-blocking CSS (requires 'critters' package)
     optimizeCss: true,
   },
   // Image optimization
