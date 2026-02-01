@@ -2,62 +2,7 @@
 
 import styles from "./page.module.css";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
-
-// Lazy load HeroOrb with deferred initialization
-const HeroOrb = dynamic(() => import("@/components/hero-orb").then((mod) => mod.HeroOrb), {
-  ssr: false,
-  loading: () => (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: 0,
-        pointerEvents: 'none'
-      }}
-    />
-  ),
-});
-
-// Wrapper to defer HeroOrb loading until after critical content paints
-function DeferredHeroOrb() {
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    // Wait for main content to paint, then load the heavy 3D component
-    // Using requestIdleCallback for better performance, with fallback to setTimeout
-    if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(() => setShouldLoad(true), { timeout: 1000 });
-      return () => cancelIdleCallback(id);
-    } else {
-      const timer = setTimeout(() => setShouldLoad(true), 100);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  if (!shouldLoad) {
-    return (
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 0,
-          pointerEvents: 'none',
-          background: 'transparent'
-        }}
-      />
-    );
-  }
-
-  return <HeroOrb />;
-}
+import { HeroBackground } from "@/components/hero-background";
 
 export default function Home() {
   const jsonLd = {
@@ -77,7 +22,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <DeferredHeroOrb />
+      <HeroBackground />
 
       <header className={styles.hero} style={{ position: 'relative', zIndex: 10 }}>
 
