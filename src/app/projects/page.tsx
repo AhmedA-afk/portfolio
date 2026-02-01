@@ -127,9 +127,7 @@ export default function Projects() {
                 </h2>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "2rem" }}>
                     {projects.slice(0, 4).map((project, index) => (
-                        <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                            <ProjectCard {...project} />
-                        </div>
+                        <ProjectCard key={index} {...project} index={index} />
                     ))}
                 </div>
             </section>
@@ -142,9 +140,7 @@ export default function Projects() {
                 </h2>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "2rem" }}>
                     {projects.slice(4).map((project, index) => (
-                        <div key={index} className="animate-fade-in" style={{ animationDelay: `${(index + 4) * 0.1}s` }}>
-                            <ProjectCard {...project} />
-                        </div>
+                        <ProjectCard key={index} {...project} index={index + 4} />
                     ))}
                 </div>
             </section>

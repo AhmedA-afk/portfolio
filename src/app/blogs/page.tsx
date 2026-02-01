@@ -76,6 +76,7 @@ const jsonLd = {
         }
     ]
 };
+import { BlogCard } from "@/components/blog-card";
 
 export default function Blogs() {
     return (
@@ -95,41 +96,10 @@ export default function Blogs() {
 
             <div style={{ display: "grid", gap: "2rem" }}>
                 {blogs.map((blog, index) => (
-                    <a
-                        key={index}
-                        href={blog.slug}
-                        target={blog.external ? "_blank" : undefined}
-                        rel={blog.external ? "noopener noreferrer" : undefined}
-                        className="glass-card animate-fade-in"
-                        style={{
-                            padding: "2rem",
-                            cursor: blog.external ? "pointer" : "default",
-                            display: "block",
-                            textDecoration: "none",
-                            animationDelay: `${index * 0.1}s`,
-                            opacity: blog.slug === "#" ? 0.7 : 1
-                        }}
-                    >
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-                            <span style={{ fontSize: "0.9rem", color: "var(--text-secondary)" }}>{blog.date}</span>
-                            <span style={{ fontSize: "0.8rem", padding: "0.25rem 0.75rem", borderRadius: "99px", background: "rgba(255,255,255,0.05)", color: "var(--text-muted)" }}>{blog.readTime}</span>
-                        </div>
-                        <h2 style={{ fontSize: "1.75rem", fontWeight: 700, marginBottom: "1rem", color: "var(--foreground)" }}>{blog.title}</h2>
-                        <p style={{ color: "var(--text-secondary)", lineHeight: "1.6", marginBottom: "1.5rem" }}>
-                            {blog.excerpt}
-                        </p>
-                        {blog.external ? (
-                            <span style={{ color: "var(--primary)", fontWeight: 500, fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                                Read on Medium <span>→</span>
-                            </span>
-                        ) : (
-                            <span style={{ color: "var(--text-muted)", fontWeight: 500, fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                                Coming Soon
-                            </span>
-                        )}
-                    </a>
+                    <BlogCard key={index} {...blog} index={index} />
                 ))}
             </div>
         </div>
     );
 }
+

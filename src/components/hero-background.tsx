@@ -154,7 +154,10 @@ export function HeroBackground() {
             <div
                 style={{
                     position: 'absolute',
-                    inset: 0,
+                    top: '-1px', // Offset to hide the first grid line
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
                     backgroundImage: isDark
                         ? 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)'
                         : 'linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)',

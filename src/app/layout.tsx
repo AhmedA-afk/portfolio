@@ -116,6 +116,9 @@ const jsonLd = {
 };
 
 import { Inter } from "next/font/google";
+import { BackToTop } from "@/components/back-to-top";
+import { ReadingProgress } from "@/components/reading-progress";
+import { PageTransition } from "@/components/page-transition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -142,7 +145,6 @@ export default function RootLayout({
           attribute="data-theme"
           defaultTheme="light"
           enableSystem
-          disableTransitionOnChange
         >
           <Navbar />
           <main style={{ minHeight: "100vh", paddingTop: "80px" }}>
@@ -153,9 +155,11 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
           <ScrollToTop />
+          <BackToTop />
           <Footer />
         </ThemeProvider>
       </body>
     </html>
   );
 }
+

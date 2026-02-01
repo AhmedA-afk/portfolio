@@ -3,6 +3,8 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import { HeroBackground } from "@/components/hero-background";
+import { TypeWriter } from "@/components/typewriter";
+import { AnimatedCounter } from "@/components/animated-counter";
 
 export default function Home() {
   const jsonLd = {
@@ -15,6 +17,14 @@ export default function Home() {
     "isPartOf": { "@id": "https://www.ahmedansari.me/#website" },
     "about": { "@id": "https://www.ahmedansari.me/#person" }
   };
+
+  const typewriterPhrases = [
+    "Building Autonomous AI Agents",
+    "Designing RAG Pipelines",
+    "Creating LLM-Powered Products",
+    "Architecting Agentic Systems",
+    "Scaling Enterprise AI Solutions",
+  ];
 
   return (
     <div className={styles.main}>
@@ -44,9 +54,24 @@ export default function Home() {
         <h1 className={`${styles.title} gradient-text animate-fade-in`}>
           Ahmed Raza Ansari
         </h1>
-        <p className={styles.subtitle}>
-          AI/ML Engineer specializing in <strong>LLMs</strong>, <strong>Generative AI</strong>, and <strong>Agentic Systems</strong>.<br />
-          I turn organizational pain points into scalable AI solutions.
+        <p className={styles.subtitle} style={{ marginBottom: '0.5rem' }}>
+          AI/ML Engineer specializing in <strong>LLMs</strong>, <strong>Generative AI</strong>, and <strong>Agentic Systems</strong>.
+        </p>
+
+        {/* Dynamic TypeWriter tagline */}
+        <p style={{
+          fontSize: '1.1rem',
+          color: 'var(--primary)',
+          fontWeight: 500,
+          minHeight: '1.5em',
+          marginBottom: '1.5rem'
+        }}>
+          <TypeWriter
+            phrases={typewriterPhrases}
+            typeSpeed={60}
+            deleteSpeed={30}
+            pauseDuration={2500}
+          />
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -58,7 +83,7 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Quick stats */}
+        {/* Animated Stats */}
         <div className="stats-container" style={{
           display: 'flex',
           gap: '2rem',
@@ -68,19 +93,26 @@ export default function Home() {
           flexDirection: 'row'
         }}>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary)' }}>1.5+</div>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--primary)' }}>
+              <AnimatedCounter target={1.5} duration={1500} suffix="+" />
+            </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Years Experience</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--secondary)' }}>5+</div>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--secondary)' }}>
+              <AnimatedCounter target={5} duration={1800} suffix="+" />
+            </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Production Systems</div>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--accent)' }}>9</div>
+            <div style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--accent)' }}>
+              <AnimatedCounter target={9} duration={2000} />
+            </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Depts Enabled</div>
           </div>
         </div>
       </header>
-    </div >
+    </div>
   );
 }
+
