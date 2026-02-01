@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { BackToTop } from "@/components/back-to-top";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ahmedansari.me"),
@@ -116,9 +117,6 @@ const jsonLd = {
 };
 
 import { Inter } from "next/font/google";
-import { BackToTop } from "@/components/back-to-top";
-import { ReadingProgress } from "@/components/reading-progress";
-import { PageTransition } from "@/components/page-transition";
 
 const inter = Inter({
   subsets: ["latin"],

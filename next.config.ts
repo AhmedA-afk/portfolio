@@ -8,14 +8,14 @@ const nextConfig: NextConfig = {
   },
   // Experimental optimizations
   experimental: {
-    // Optimize CSS
+    // Optimize CSS - helps with render-blocking CSS
     optimizeCss: true,
   },
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  // Modularize imports for tree-shaking
+  // Modularize imports for tree-shaking (reduces unused JS)
   modularizeImports: {
     'lucide-react': {
       transform: 'lucide-react/dist/esm/icons/{{ kebabCase member }}',
@@ -23,6 +23,9 @@ const nextConfig: NextConfig = {
   },
   // React optimizations
   reactStrictMode: true,
+  // Reduce bundle size by externalizing packages that shouldn't be bundled
+  serverExternalPackages: ['feed'],
 };
 
 export default nextConfig;
+
