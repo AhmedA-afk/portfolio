@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Documentation | Ahmed Ansari",
         description: "Learn how to use the interactive CLI terminal and explore portfolio features.",
-        url: "https://ahmedansari.me/docs",
+        url: "https://www.ahmedansari.me/docs",
     },
     alternates: {
-        canonical: "https://ahmedansari.me/docs",
+        canonical: "https://www.ahmedansari.me/docs",
     },
 };
 
@@ -26,7 +26,7 @@ export default function Documentation() {
         },
         "datePublished": "2024-03-20",
         "dateModified": new Date().toISOString().split('T')[0],
-        "image": "https://ahmedansari.me/og-image.png" // Placeholder or actual
+        "image": "https://www.ahmedansari.me/og-image.png" // Placeholder or actual
     };
 
     return (

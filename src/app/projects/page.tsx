@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Projects | Ahmed Ansari",
         description: "Explore Ahmed Ansari's portfolio of RAG systems, Multi-Agent architectures, and Automation tools.",
-        url: "https://ahmedansari.me/projects",
+        url: "https://www.ahmedansari.me/projects",
     },
     alternates: {
-        canonical: "https://ahmedansari.me/projects",
+        canonical: "https://www.ahmedansari.me/projects",
     },
 };
 
@@ -75,12 +75,12 @@ const jsonLd = {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ahmedansari.me"
+                "item": "https://www.ahmedansari.me"
             }, {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Projects",
-                "item": "https://ahmedansari.me/projects"
+                "item": "https://www.ahmedansari.me/projects"
             }]
         },
         {
@@ -95,7 +95,7 @@ const jsonLd = {
                     "programmingLanguage": project.tags.join(", "),
                     "codeRepository": project.github || undefined,
                     "author": {
-                        "@id": "https://ahmedansari.me/#person"
+                        "@id": "https://www.ahmedansari.me/#person"
                     }
                 }
             }))

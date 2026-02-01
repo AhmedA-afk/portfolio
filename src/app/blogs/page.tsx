@@ -6,10 +6,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Blogs & Insights | Ahmed Ansari",
         description: "Deep dives into AI/ML engineering, from local inference to production-grade agent systems.",
-        url: "https://ahmedansari.me/blogs",
+        url: "https://www.ahmedansari.me/blogs",
     },
     alternates: {
-        canonical: "https://ahmedansari.me/blogs",
+        canonical: "https://www.ahmedansari.me/blogs",
     },
 };
 
@@ -49,12 +49,12 @@ const jsonLd = {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://ahmedansari.me"
+                "item": "https://www.ahmedansari.me"
             }, {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Blogs",
-                "item": "https://ahmedansari.me/blogs"
+                "item": "https://www.ahmedansari.me/blogs"
             }]
         },
         {
@@ -67,7 +67,7 @@ const jsonLd = {
                     "headline": blog.title,
                     "description": blog.excerpt,
                     "author": {
-                        "@id": "https://ahmedansari.me/#person"
+                        "@id": "https://www.ahmedansari.me/#person"
                     },
                     "url": blog.slug !== '#' ? blog.slug : undefined,
                     "datePublished": blog.date !== "Coming Soon" ? "2024-01-01" : undefined

@@ -16,8 +16,8 @@
 
   /* Typography */
   --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
 
   /* Gradients */
   --gradient-start: #2563eb;
@@ -42,7 +42,7 @@
   /* Typography */
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
-  --text-muted: #64748b;
+  --text-muted: #94a3b8;
 
   /* Gradients */
   --gradient-start: #22d3ee;
@@ -194,39 +194,41 @@ a:hover {
   display: inline-block;
 }
 
-/* Animations */
+/* Animations - GPU accelerated */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translate3d(0, 20px, 0);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-fade-in {
   animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: opacity, transform;
 }
 
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
 
   50% {
-    transform: translateY(-20px);
+    transform: translate3d(0, -20px, 0);
   }
 
   100% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Mobile Optimizations */

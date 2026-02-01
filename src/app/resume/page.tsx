@@ -6,10 +6,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Resume | Ahmed Ansari",
         description: "Professional resume of Ahmed Ansari - Applied GenAI / AI Systems Engineer.",
-        url: "https://ahmedansari.me/resume",
+        url: "https://www.ahmedansari.me/resume",
     },
     alternates: {
-        canonical: "https://ahmedansari.me/resume",
+        canonical: "https://www.ahmedansari.me/resume",
     },
 };
 

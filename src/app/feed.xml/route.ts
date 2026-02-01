@@ -5,16 +5,16 @@ export async function GET() {
     const feed = new Feed({
         title: "Ahmed Ansari - AI/ML Engineer",
         description: "Thoughts on AI, LLMs, and Agentic Systems.",
-        id: "https://ahmedansari.me/",
-        link: "https://ahmedansari.me/",
+        id: "https://www.ahmedansari.me/",
+        link: "https://www.ahmedansari.me/",
         language: "en",
-        image: "https://ahmedansari.me/favicon.png",
-        favicon: "https://ahmedansari.me/favicon.ico",
+        image: "https://www.ahmedansari.me/favicon.png",
+        favicon: "https://www.ahmedansari.me/favicon.ico",
         copyright: "All rights reserved 2026, Ahmed Ansari",
         author: {
             name: "Ahmed Ansari",
             email: "ahmedraza1ansari@gmail.com",
-            link: "https://ahmedansari.me"
+            link: "https://www.ahmedansari.me"
         }
     });
 

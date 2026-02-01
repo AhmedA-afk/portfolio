@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://ahmedansari.me'
+    const baseUrl = 'https://www.ahmedansari.me'
 
     // Core pages
     const routes = [
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         '/blogs'
     ].map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date('2025-01-27'),
+        lastModified: new Date(),
         changeFrequency: 'weekly' as const,
         priority: route === '' ? 1 : 0.8,
     }))

@@ -129,9 +129,9 @@ function HighQualityBlob({ isDark, reduceMotion }: { isDark: boolean; reduceMoti
     });
 
     return (
-        <Float 
-            speed={reduceMotion ? 0 : 1.5} 
-            rotationIntensity={reduceMotion ? 0 : 1} 
+        <Float
+            speed={reduceMotion ? 0 : 1.5}
+            rotationIntensity={reduceMotion ? 0 : 1}
             floatIntensity={reduceMotion ? 0 : 1.5}
         >
             <mesh ref={meshRef} scale={2.2}>
@@ -171,9 +171,9 @@ function MediumQualityBlob({ isDark, reduceMotion }: { isDark: boolean; reduceMo
     });
 
     return (
-        <Float 
-            speed={reduceMotion ? 0 : 1.5} 
-            rotationIntensity={reduceMotion ? 0 : 0.8} 
+        <Float
+            speed={reduceMotion ? 0 : 1.5}
+            rotationIntensity={reduceMotion ? 0 : 0.8}
             floatIntensity={reduceMotion ? 0 : 1}
         >
             <mesh ref={meshRef} scale={2.2}>
@@ -211,9 +211,9 @@ function LowQualityBlob({ isDark, reduceMotion }: { isDark: boolean; reduceMotio
     });
 
     return (
-        <Float 
-            speed={reduceMotion ? 0 : 1} 
-            rotationIntensity={reduceMotion ? 0 : 0.5} 
+        <Float
+            speed={reduceMotion ? 0 : 1}
+            rotationIntensity={reduceMotion ? 0 : 0.5}
             floatIntensity={reduceMotion ? 0 : 0.8}
         >
             <mesh ref={meshRef} scale={2.2}>
@@ -252,7 +252,7 @@ function PerformanceMonitor({ onLowFPS }: { onLowFPS: () => void }) {
 
     useFrame(() => {
         if (hasTriggered.current) return;
-        
+
         frameCount.current++;
         const now = performance.now();
         const delta = now - lastTime.current;
@@ -332,7 +332,21 @@ export function HeroOrb() {
         });
     };
 
-    if (!mounted || hasError) return null;
+    if (!mounted || hasError) {
+        // Return placeholder with same dimensions to prevent CLS
+        return (
+            <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: 0,
+                overflow: 'hidden',
+                pointerEvents: 'none'
+            }} />
+        );
+    }
 
     const currentTheme = resolvedTheme || theme;
     const isDark = currentTheme === 'dark';

@@ -3,22 +3,72 @@
 import styles from "./page.module.css";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 
+// Lazy load HeroOrb with deferred initialization
 const HeroOrb = dynamic(() => import("@/components/hero-orb").then((mod) => mod.HeroOrb), {
   ssr: false,
-  loading: () => <div style={{ height: "400px", width: "400px" }} />, // Placeholder to avoid layout shift
+  loading: () => (
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}
+    />
+  ),
 });
+
+// Wrapper to defer HeroOrb loading until after critical content paints
+function DeferredHeroOrb() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    // Wait for main content to paint, then load the heavy 3D component
+    // Using requestIdleCallback for better performance, with fallback to setTimeout
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => setShouldLoad(true), { timeout: 1000 });
+      return () => cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(() => setShouldLoad(true), 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  if (!shouldLoad) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 0,
+          pointerEvents: 'none',
+          background: 'transparent'
+        }}
+      />
+    );
+  }
+
+  return <HeroOrb />;
+}
 
 export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://ahmedansari.me/#webpage",
-    "url": "https://ahmedansari.me",
+    "@id": "https://www.ahmedansari.me/#webpage",
+    "url": "https://www.ahmedansari.me",
     "name": "Ahmed Ansari - AI/ML Engineer Portfolio",
     "description": "Portfolio of Ahmed Ansari, an AI/ML Engineer specializing in LLMs, Generative AI, and Agentic Systems.",
-    "isPartOf": { "@id": "https://ahmedansari.me/#website" },
-    "about": { "@id": "https://ahmedansari.me/#person" }
+    "isPartOf": { "@id": "https://www.ahmedansari.me/#website" },
+    "about": { "@id": "https://www.ahmedansari.me/#person" }
   };
 
   return (
@@ -27,7 +77,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroOrb />
+      <DeferredHeroOrb />
 
       <header className={styles.hero} style={{ position: 'relative', zIndex: 10 }}>
 

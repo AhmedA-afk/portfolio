@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ahmedansari.me"),
+  metadataBase: new URL("https://www.ahmedansari.me"),
   title: "Ahmed Ansari : Portfolio - AI/ML Engineer",
   description: "Portfolio of Ahmed Ansari - AI/ML Engineer specializing in LLMs, Generative AI, and Agentic Systems.",
   keywords: ["Ahmed Ansari", "AI Engineer", "AI/ML Engineer", "GenAI", "LLM Engineer", "Machine Learning", "Ahmedabad", "Portfolio", "Motadata", "RAG Systems"],
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ahmed Ansari : Portfolio - AI/ML Engineer",
     description: "Building autonomous AI agents and production-ready LLM systems.",
-    url: "https://ahmedansari.me",
+    url: "https://www.ahmedansari.me",
     siteName: "Ahmed Ansari Portfolio",
     locale: "en_US",
     type: "website",
@@ -49,10 +49,10 @@ export const metadata: Metadata = {
     creator: "@AhmedA-afk",
   },
   alternates: {
-    canonical: "https://ahmedansari.me",
+    canonical: "https://www.ahmedansari.me",
     languages: {
-      'en-US': 'https://ahmedansari.me',
-      'x-default': 'https://ahmedansari.me',
+      'en-US': 'https://www.ahmedansari.me',
+      'x-default': 'https://www.ahmedansari.me',
     },
   },
   appleWebApp: {
@@ -80,23 +80,23 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://ahmedansari.me/#website",
-      "url": "https://ahmedansari.me",
+      "@id": "https://www.ahmedansari.me/#website",
+      "url": "https://www.ahmedansari.me",
       "name": "Ahmed Ansari Portfolio",
       "publisher": {
-        "@id": "https://ahmedansari.me/#person"
+        "@id": "https://www.ahmedansari.me/#person"
       }
     },
     {
       "@type": "Person",
-      "@id": "https://ahmedansari.me/#person",
+      "@id": "https://www.ahmedansari.me/#person",
       "name": "Ahmed Raza Ansari",
       "jobTitle": "AI/ML Engineer",
-      "url": "https://ahmedansari.me",
+      "url": "https://www.ahmedansari.me",
       "image": {
         "@type": "ImageObject",
-        "@id": "https://ahmedansari.me/#logo",
-        "url": "https://ahmedansari.me/favicon-96x96.png",
+        "@id": "https://www.ahmedansari.me/#logo",
+        "url": "https://www.ahmedansari.me/favicon-96x96.png",
         "caption": "Ahmed Ansari"
       },
       "sameAs": [
@@ -106,7 +106,7 @@ const jsonLd = {
       ],
       "worksFor": {
         "@type": "Organization",
-        "@id": "https://ahmedansari.me/#organization",
+        "@id": "https://www.ahmedansari.me/#organization",
         "name": "Motadata (MindArray Systems Pvt. Ltd.)",
         "url": "https://www.motadata.com"
       },
@@ -117,7 +117,11 @@ const jsonLd = {
 
 import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap", // Prevent render blocking
+});
 
 export default function RootLayout({
   children,
@@ -126,6 +130,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to external resources for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* DNS prefetch for analytics/API endpoints if any */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      </head>
       <body suppressHydrationWarning className={inter.className}>
         <ThemeProvider
           attribute="data-theme"

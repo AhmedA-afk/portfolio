@@ -5,7 +5,13 @@ import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { Terminal as TerminalIcon } from "lucide-react";
 import { useState } from "react";
-import { Terminal } from "./terminal";
+import dynamic from "next/dynamic";
+
+// Lazy load Terminal to reduce initial bundle size (Terminal + framer-motion)
+const Terminal = dynamic(() => import("./terminal").then((mod) => mod.Terminal), {
+    ssr: false,
+    loading: () => null,
+});
 
 const links = [
     { href: "/", label: "Home" },
@@ -135,6 +141,7 @@ export function Navbar() {
                     <button
                         onClick={() => setIsTerminalOpen(!isTerminalOpen)}
                         className="glass-button"
+                        aria-label="Toggle Terminal"
                         style={{
                             width: "40px", height: "40px", borderRadius: "12px",
                             padding: 0, display: "flex", alignItems: "center", justifyContent: "center",

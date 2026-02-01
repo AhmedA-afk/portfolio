@@ -6,10 +6,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "About Ahmed Ansari | AI/ML Engineer",
         description: "Applied GenAI / AI Systems Engineer with experience in building production LLM systems.",
-        url: "https://ahmedansari.me/about",
+        url: "https://www.ahmedansari.me/about",
     },
     alternates: {
-        canonical: "https://ahmedansari.me/about",
+        canonical: "https://www.ahmedansari.me/about",
     },
 };
 
