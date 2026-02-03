@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Documentation | Ahmed Ansari",
         description: "Learn how to use the interactive CLI terminal and explore portfolio features.",
-        url: "https://docs.ahmedansari.me",
+        url: "https://www.ahmedansari.me/docs",
     },
     alternates: {
-        canonical: "https://docs.ahmedansari.me",
+        canonical: "https://www.ahmedansari.me/docs",
     },
 };
 
@@ -29,14 +29,14 @@ export default function Documentation() {
                     "@type": "ListItem",
                     "position": 2,
                     "name": "Docs",
-                    "item": "https://docs.ahmedansari.me"
+                    "item": "https://www.ahmedansari.me/docs"
                 }]
             },
             {
                 "@type": "TechArticle",
                 "headline": "Ahmed Ansari Portfolio Documentation",
                 "description": "Comprehensive documentation for Ahmed Ansari's interactive portfolio, covering CLI commands, AI tools, and architecture.",
-                "url": "https://docs.ahmedansari.me",
+                "url": "https://www.ahmedansari.me/docs",
                 "author": {
                     "@id": "https://www.ahmedansari.me/#person"
                 },

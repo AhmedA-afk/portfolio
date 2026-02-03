@@ -6,10 +6,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Blogs & Insights | Ahmed Ansari",
         description: "Deep dives into AI/ML engineering, from local inference to production-grade agent systems.",
-        url: "https://blog.ahmedansari.me",
+        url: "https://www.ahmedansari.me/blogs",
     },
     alternates: {
-        canonical: "https://blog.ahmedansari.me",
+        canonical: "https://www.ahmedansari.me/blogs",
     },
 };
 
@@ -54,7 +54,7 @@ const jsonLd = {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Blog",
-                "item": "https://blog.ahmedansari.me"
+                "item": "https://www.ahmedansari.me/blogs"
             }]
         },
         {

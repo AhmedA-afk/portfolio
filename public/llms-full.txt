@@ -9,16 +9,16 @@
 | Domain | Purpose | URL |
 |--------|---------|-----|
 | Main Website | Portfolio landing, about, projects, resume | https://www.ahmedansari.me |
-| Documentation | Portfolio features, CLI terminal guide | https://docs.ahmedansari.me |
-| Blog | Articles on AI/ML, LLMs, agentic systems | https://blog.ahmedansari.me |
+| Documentation | Portfolio features, CLI terminal guide | https://www.ahmedansari.me/docs |
+| Blog | Articles on AI/ML, LLMs, agentic systems | https://www.ahmedansari.me/blogs |
 
 ### All Pages
 - **Home**: https://www.ahmedansari.me
 - **About**: https://www.ahmedansari.me/about
 - **Projects**: https://www.ahmedansari.me/projects
 - **Resume**: https://www.ahmedansari.me/resume
-- **Documentation**: https://docs.ahmedansari.me
-- **Blog**: https://blog.ahmedansari.me
+- **Documentation**: https://www.ahmedansari.me/docs
+- **Blog**: https://www.ahmedansari.me/blogs
 
 ---
 

@@ -9,8 +9,8 @@
 ## Site Structure
 
 > **Main Website**: https://www.ahmedansari.me
-> **Documentation**: https://docs.ahmedansari.me
-> **Blog**: https://blog.ahmedansari.me
+> **Documentation**: https://www.ahmedansari.me/docs
+> **Blog**: https://www.ahmedansari.me/blogs
 > **Location**: Ahmedabad, Gujarat, India
 
 ### Pages
@@ -18,8 +18,8 @@
 - **About** (https://www.ahmedansari.me/about) - Background, experience, and education
 - **Projects** (https://www.ahmedansari.me/projects) - Featured work and open source contributions
 - **Resume** (https://www.ahmedansari.me/resume) - Professional resume
-- **Documentation** (https://docs.ahmedansari.me) - Portfolio features and CLI terminal guide
-- **Blog** (https://blog.ahmedansari.me) - Articles on AI/ML, LLMs, and agentic systems
+- **Documentation** (https://www.ahmedansari.me/docs) - Portfolio features and CLI terminal guide
+- **Blog** (https://www.ahmedansari.me/blogs) - Articles on AI/ML, LLMs, and agentic systems
 
 ---
 
