@@ -1,7 +1,13 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+// Subscribe function that does nothing (state never changes after mount)
+const subscribe = () => () => { };
+// Get snapshot returns true on client, false on server
+const getSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 /**
  * A lightweight, CSS-only hero background with animated gradients and floating orbs.
@@ -9,11 +15,8 @@ import { useEffect, useState } from "react";
  */
 export function HeroBackground() {
     const { resolvedTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+    // Use useSyncExternalStore for hydration-safe mounted detection
+    const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
     const isDark = mounted && resolvedTheme === 'dark';
 

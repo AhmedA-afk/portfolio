@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Documentation | Ahmed Ansari",
         description: "Learn how to use the interactive CLI terminal and explore portfolio features.",
-        url: "https://www.ahmedansari.me/docs",
+        url: "https://docs.ahmedansari.me",
     },
     alternates: {
-        canonical: "https://www.ahmedansari.me/docs",
+        canonical: "https://docs.ahmedansari.me",
     },
 };
 

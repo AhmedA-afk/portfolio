@@ -73,9 +73,6 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
     const [mounted, setMounted] = useState(false);
     const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null);
 
-    // Valid pages for navigation
-    const validPages = ["home", "about", "projects", "blogs", "docs", "resume"];
-
     useEffect(() => {
         if (typeof document !== "undefined") {
             setPortalContainer(document.body);
@@ -90,14 +87,6 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             return () => clearTimeout(timer);
         }
     }, [history, isOpen]);
-
-    // Check if input is a known command or navigation
-    const isKnownCommand = useCallback((cmd: string): boolean => {
-        const trimmed = cmd.trim().toLowerCase();
-        if (trimmed.startsWith("cd ")) return true;
-        if (KNOWN_COMMANDS.includes(trimmed)) return true;
-        return false;
-    }, []);
 
     // Handle AI query
     const handleAIQuery = useCallback(async (query: string) => {
@@ -170,6 +159,8 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
     const handleCommand = useCallback((cmd: string) => {
         const trimmedCmd = cmd.trim().toLowerCase();
         let output: React.ReactNode = "";
+        // Valid pages for navigation (defined inside callback to avoid dependency issues)
+        const validPages = ["home", "about", "projects", "blogs", "docs", "resume"];
 
         // Handle 'cd' navigation command
         if (trimmedCmd.startsWith("cd ")) {
@@ -271,7 +262,7 @@ export function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         }
 
         setHistory((prev) => [...prev, { command: cmd, output }]);
-    }, [theme, setTheme, router, validPages, handleAIQuery]);
+    }, [theme, setTheme, router, handleAIQuery]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

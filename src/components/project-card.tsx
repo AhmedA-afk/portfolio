@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Github, ExternalLink } from "lucide-react";
 
 interface ProjectCardProps {

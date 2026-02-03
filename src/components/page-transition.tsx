@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState, ReactNode } from "react";
+import { useLayoutEffect, useState, ReactNode, useRef } from "react";
 
 interface PageTransitionProps {
     children: ReactNode;
@@ -14,8 +14,15 @@ export function PageTransition({ children }: PageTransitionProps) {
     const pathname = usePathname();
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [displayChildren, setDisplayChildren] = useState(children);
+    const isFirstRender = useRef(true);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        // Skip transition on first render
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+
         // Start fade out
         setIsTransitioning(true);
 
@@ -26,7 +33,8 @@ export function PageTransition({ children }: PageTransitionProps) {
         }, 150); // Match the CSS transition duration
 
         return () => clearTimeout(timer);
-    }, [pathname, children]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname]);
 
     return (
         <div
