@@ -1,0 +1,212 @@
+# Ahmed Raza Ansari - Full Portfolio Context
+
+> This is the extended version of llms.txt with comprehensive information for AI crawlers and assistants.
+
+---
+
+## Site Structure
+
+| Domain | Purpose | URL |
+|--------|---------|-----|
+| Main Website | Portfolio landing, about, projects, resume | https://www.ahmedansari.me |
+| Documentation | Portfolio features, CLI terminal guide | https://docs.ahmedansari.me |
+| Blog | Articles on AI/ML, LLMs, agentic systems | https://blog.ahmedansari.me |
+
+### All Pages
+- **Home**: https://www.ahmedansari.me
+- **About**: https://www.ahmedansari.me/about
+- **Projects**: https://www.ahmedansari.me/projects
+- **Resume**: https://www.ahmedansari.me/resume
+- **Documentation**: https://docs.ahmedansari.me
+- **Blog**: https://blog.ahmedansari.me
+
+---
+
+## Basic Info
+
+- **Name**: Ahmed Raza Ansari
+- **Title**: AI-ML Engineer
+- **Location**: Ahmedabad, Gujarat, India
+- **Email**: ahmedraza1ansari@gmail.com
+- **GitHub**: https://github.com/AhmedA-afk
+- **LinkedIn**: https://linkedin.com/in/ahmed-1-ansari
+- **Linktree**: https://linktr.ee/ahmed1ansari
+
+---
+
+## Current Role
+
+- **Position**: Associate AI/ML Engineer
+- **Company**: Motadata (MindArray Systems Pvt. Ltd.)
+- **Duration**: Jun 2025 - Present
+- **Location**: Ahmedabad, Gujarat, India
+
+---
+
+## Experience Summary
+
+Ahmed has 1.5+ years of experience building LLM-powered systems, automation platforms, and internal AI tools in production environments. He specializes in:
+
+- Large Language Models (LLMs)
+- Generative AI
+- Agentic Systems
+- RAG (Retrieval-Augmented Generation)
+- Multi-Agent Architectures
+- Enterprise Automation
+
+---
+
+## Key Work at Motadata
+
+### 1. Internal MCP/Agno Platform (OneLayer)
+- Multi-agent chat + solution implementation dashboard
+- Enables querying across Motadata documentation and tickets
+- Used internally by Sales, Ops, and QA teams
+- **Tech**: RAG-based embeddings (Weaviate, PGVector), automated test case generation, ticket resolution assistance
+
+### 2. Hardware & BOQ Calculator
+- End-to-end system for Sales and Presales teams
+- Replaced 2 days of manual work with 2 hours automated workflow
+- Daily users: 5-10 people
+- **Features**: Auth, logs, documentation, data retention, access controls, backup
+
+### 3. WhatsApp Ticket Automation
+- Integrated with Motadata ServiceOps
+- Live for 6+ months serving ~200 customers
+- ~10-20 tickets/day processed
+- **Tech**: Meta APIs, n8n workflows, CRON triggers, conditional routing
+
+### 4. Multi-Agent Blog Generation Pipeline
+- Used by Marketing and Sales teams
+- Publishes 2-3 external blogs weekly
+- Content types: Technical blogs, competitor analysis, feature articles
+
+### 5. ServiceOps AI Copilot
+- NL2SQL and RAG-based chatbot for ITSM portals
+- **Tech**: LLMs, Python, RAG, Text2SQL
+
+### 6. Research & Analysis
+- Deep research on Text2SQL systems (schema grounding, query planning, execution strategies)
+- Evaluated automation frameworks (n8n, Dify, Zapier-class systems)
+- Led architectural analysis of MoveWorks (closed-source enterprise AI assistant)
+
+---
+
+## AI Transformation & Enablement
+
+- Worked directly under CEO, COO, AIOps Manager, and ServiceOps Manager
+- Conducted 1:1 discovery sessions with 9 departments
+- Designed and delivered cross-department AI enablement sessions
+- Created AI enablement packages (guides, tools, workflows)
+- Established monthly internal AI newsletters
+- Drove organization-wide AI adoption beyond ad-hoc ChatGPT usage
+
+---
+
+## Previous Experience
+
+### R&D AI Engineer Intern → Full-Time (Aug 2024 - May 2025)
+- Company: Motadata, Ahmedabad
+- Text2SQL research, automation framework evaluation
+- Multi-agent blog generation workflows
+
+### Data Science Intern (May 2024 - Jun 2024)
+- Company: Trionic Technologies LLP (Remote)
+- LLM localization using Mistral 7b v0.3 Instruct
+- Hosted via Ollama/LMStudio with Docker containerization
+
+### Forage Virtual Intern (May 2023 - Jun 2023)
+- 7 micro-internships: VISA, AWS, Goldman Sachs, Quantium, Deloitte, British Airways, Accenture
+- Domains: API Development, Solutions Architecture, Cyber Security, Data Analysis
+
+---
+
+## Technical Skills
+
+### GenAI / LLMs
+- RAG Systems & Text2SQL
+- Multi-Agent Architectures (Single, Multi, Hierarchical)
+- Agent Orchestration & MCP Frameworks
+- LangChain, LlamaIndex, Agno
+- Prompt Engineering, Chain-of-Thought
+- Fine-tuning, Quantization (GGUF)
+- A2A Protocol
+
+### ML & Data Science
+- TensorFlow, PyTorch
+- Vector Databases (Weaviate, PGVector)
+- Embeddings & Model Evaluation
+- Model Development
+
+### Automation & Infrastructure
+- n8n, Dify
+- Docker, Kubernetes
+- PostgreSQL, MongoDB
+- Internal Tooling & Workflow Orchestration
+
+### Languages
+- Python (Expert)
+- TypeScript, JavaScript
+- C++, SQL
+
+### Cloud
+- AWS, Google Cloud, Azure
+- Git, Postman
+
+---
+
+## Education
+
+### Bachelor of Technology - Computer Science & Engineering
+- Institution: CSPIT – CHARUSAT
+- Duration: 2022 – 2025
+
+### Diploma of Engineering - Information Technology
+- Institution: Lukhdhirji Engineering College, Morbi
+- Duration: 2019 – 2022
+
+---
+
+## Open Source Contributions
+
+- **Agno OS**: Bug fixes and feature enhancements, public PRs merged
+- Built internal systems on top of Agno for multi-agent and RAG-based workflows
+
+---
+
+## Personal Projects
+
+1. **ByteWrite** - AI-Powered Audio Summarization Tool (TypeScript)
+2. **GithubGen** - Developer tool for generating structured READMEs (JavaScript)
+3. **Local-LLM-Inference-Lab** - Research and implementation of local LLM hosting
+4. **CS50-Ninja** - HarvardX CS50 capstone game project
+
+---
+
+## Publications & Writing
+
+### Medium Articles
+- **"How can GenAI improve and reform the education sector (instead of ruining it)"**
+  - URL: https://medium.com/@ahmedraza1ansari/how-can-genai-improve-and-reform-the-education-sector-instead-of-ruining-it-763cdadb5c20
+  - Topics: Personalized learning, operational efficiency, shifting from fear of cheating to empowerment
+
+---
+
+## Personal Interests
+
+- Reading Classics/Novels
+- Sketching
+- Writing poetry
+- Hackathons and tech meetups/conferences
+
+---
+
+## Additional Resources
+
+- **Sitemap**: https://www.ahmedansari.me/sitemap.xml
+- **RSS Feed**: https://www.ahmedansari.me/feed.xml
+- **Robots.txt**: https://www.ahmedansari.me/robots.txt
+
+---
+
+*Last updated: February 2026*

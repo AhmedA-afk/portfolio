@@ -17,16 +17,34 @@ export const metadata: Metadata = {
 export default function Documentation() {
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "TechArticle",
-        "headline": "Ahmed Ansari Portfolio Documentation",
-        "description": "Comprehensive documentation for Ahmed Ansari's interactive portfolio, covering CLI commands, AI tools, and architecture.",
-        "author": {
-            "@type": "Person",
-            "name": "Ahmed Raza Ansari"
-        },
-        "datePublished": "2024-03-20",
-        "dateModified": new Date().toISOString().split('T')[0],
-        "image": "https://www.ahmedansari.me/og-image.png" // Placeholder or actual
+        "@graph": [
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [{
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://www.ahmedansari.me"
+                }, {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Docs",
+                    "item": "https://docs.ahmedansari.me"
+                }]
+            },
+            {
+                "@type": "TechArticle",
+                "headline": "Ahmed Ansari Portfolio Documentation",
+                "description": "Comprehensive documentation for Ahmed Ansari's interactive portfolio, covering CLI commands, AI tools, and architecture.",
+                "url": "https://docs.ahmedansari.me",
+                "author": {
+                    "@id": "https://www.ahmedansari.me/#person"
+                },
+                "datePublished": "2024-03-20",
+                "dateModified": new Date().toISOString().split('T')[0],
+                "image": "https://www.ahmedansari.me/favicon-96x96.png"
+            }
+        ]
     };
 
     return (
@@ -39,3 +57,4 @@ export default function Documentation() {
         </>
     );
 }
+
