@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { Terminal as TerminalIcon } from "lucide-react";
-import { useState, useMemo, useSyncExternalStore } from "react";
+import { useState, useMemo, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 // Lazy load Terminal to reduce initial bundle size (Terminal + framer-motion)
@@ -35,30 +35,33 @@ export function Navbar() {
     const [isTerminalOpen, setIsTerminalOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [hasOpened, setHasOpened] = useState(false);
+    
+    // Domain detection state - defaults to non-production for SSR safety
+    const [isProduction, setIsProduction] = useState(false);
+    const [currentSubdomain, setCurrentSubdomain] = useState<string | null>(null);
 
-    // Detect current domain using useSyncExternalStore (hydration-safe)
-    const domainInfo = useSyncExternalStore(
-        // Subscribe function (no-op since hostname doesn't change)
-        () => () => {},
-        // getSnapshot for client
-        () => {
-            const hostname = window.location.hostname;
-            if (hostname.includes(MAIN_DOMAIN)) {
-                if (hostname.startsWith("blog.")) {
-                    return { isProduction: true, subdomain: "blog" as const };
-                } else if (hostname.startsWith("docs.")) {
-                    return { isProduction: true, subdomain: "docs" as const };
-                } else {
-                    return { isProduction: true, subdomain: null };
-                }
+    // Detect current domain on client-side mount
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        
+        const hostname = window.location.hostname;
+        
+        if (hostname.includes(MAIN_DOMAIN)) {
+            setIsProduction(true);
+            
+            if (hostname.startsWith("blog.")) {
+                setCurrentSubdomain("blog");
+            } else if (hostname.startsWith("docs.")) {
+                setCurrentSubdomain("docs");
+            } else {
+                setCurrentSubdomain(null);
             }
-            return { isProduction: false, subdomain: null };
-        },
-        // getServerSnapshot (SSR fallback)
-        () => ({ isProduction: false, subdomain: null })
-    );
-
-    const { isProduction, subdomain: currentSubdomain } = domainInfo;
+        } else {
+            setIsProduction(false);
+            setCurrentSubdomain(null);
+        }
+    }, []);
 
     // Generate navigation links with correct URLs based on current domain
     const links = useMemo(() => {
