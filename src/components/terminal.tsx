@@ -33,17 +33,6 @@ const ZORIN = {
     ai: "#f0b429",            // Golden yellow for AI responses
 };
 
-// Known commands that should NOT go to AI
-const KNOWN_COMMANDS = [
-    "help", "/help",
-    "about", "/about",
-    "projects", "/projects",
-    "socials", "/socials",
-    "theme", "/theme",
-    "clear", "/clear",
-    ""
-];
-
 // Simple markdown parser for AI responses
 function parseMarkdown(text: string): React.ReactNode {
     // Split by bold markers (**text**)

@@ -50,20 +50,17 @@ export function middleware(request: NextRequest) {
         return NextResponse.rewrite(url);
     }
 
-    // For main domain, redirect /docs and /blogs to subdomains (optional)
-    // Uncomment below if you want to force subdomain usage
-    /*
-    if (!subdomain) {
-      if (url.pathname.startsWith('/docs')) {
-        const newPath = url.pathname.replace('/docs', '') || '/';
-        return NextResponse.redirect(new URL(newPath, `https://docs.ahmedansari.me`));
-      }
-      if (url.pathname.startsWith('/blogs')) {
-        const newPath = url.pathname.replace('/blogs', '') || '/';
-        return NextResponse.redirect(new URL(newPath, `https://blog.ahmedansari.me`));
-      }
+    // For main domain, redirect /docs and /blogs to subdomains
+    if (!subdomain && host.includes('ahmedansari.me')) {
+        if (url.pathname.startsWith('/docs')) {
+            const newPath = url.pathname.replace('/docs', '') || '/';
+            return NextResponse.redirect(new URL(newPath, 'https://docs.ahmedansari.me'));
+        }
+        if (url.pathname.startsWith('/blogs')) {
+            const newPath = url.pathname.replace('/blogs', '') || '/';
+            return NextResponse.redirect(new URL(newPath, 'https://blog.ahmedansari.me'));
+        }
     }
-    */
 
     return NextResponse.next();
 }
